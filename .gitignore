@@ -1,0 +1,51 @@
+.idea
+.git
+/site/__MACOSX/
+
+# dependencies
+/node_modules
+**/node_modules
+**/dist
+/dist
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# production
+/build
+
+# misc
+.DS_Store
+.env.local
+.env.development
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+/.git
+/build
+/app
+/bootstrap
+/config
+/database
+/resources
+/routes
+/storage
+/tests
+/composer.json
+/composer.lock
+/.env.example
+/.env
+/.ENV
+/artisan
+/phpunit.xml
+/nohup.out
+/server.php
+/phpunit.xml
+/public/img_tickets
+/vendor

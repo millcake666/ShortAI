@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "useDefineForClassFields": true,
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "allowJs": true,
+    "checkJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": false,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "typeRoots": ["./types/**/*", "./node_modules/@types/**/*"],
+    "baseUrl": "./",
+    "paths": {
+      "react": ["node_modules/@types/react"]
+    }
+  },
+  "include": [
+    "packages/short-ai-app/**/*.ts",
+    "packages/short-ai-app/**/*.tsx",
+    "packages/examples-app/**/*.ts",
+    "packages/examples-app/**/*.tsx"
+  ]
+}
