@@ -1,19 +1,25 @@
 import ArrowForwardRoundedIcon from '@mui/icons-material/ArrowForwardRounded'
-import { Button, Chip, Stack, Tooltip, Typography } from '@mui/material'
+import { Button, Chip, Paper, Stack, TextField, Tooltip, Typography } from '@mui/material'
+import { DndProvider, useDrop } from 'react-dnd'
+import { HTML5Backend } from 'react-dnd-html5-backend'
+import { useDropzone } from 'react-dropzone'
 import { Col, Row } from 'react-grid-system'
 import { useNavigate } from 'react-router-dom'
 
 import { ROUTES } from '../../consts/routes'
-import { Spacer } from '../primitives'
+import { Relative, Spacer, ZIndex } from '../primitives'
+import { DropInput } from './DropInput'
 
 export const HomePage = () => {
   const navigate = useNavigate()
+  // const { getRootProps, getInputProps, acceptedFiles } = useDropzone({ noClick: false })
 
   return (
     <div>
       <Row>
-        <Col>1</Col>
-        <Col>2</Col>
+        <Col>
+          <DropInput />
+        </Col>
       </Row>
     </div>
   )
