@@ -1,11 +1,16 @@
 import ArrowForwardRoundedIcon from '@mui/icons-material/ArrowForwardRounded'
-import {Box, Button, Chip, Container, Slider, Stack, Tooltip, Typography} from '@mui/material'
+import {Box, Button, Chip, Container, Icon, Slider, Stack, Tooltip, Typography} from '@mui/material'
 import { Col, Row } from 'react-grid-system'
 import { useNavigate } from 'react-router-dom'
 
 import { ROUTES } from '../../consts/routes'
 import {DropInput} from "./DropInput";
-import {Spacer, Flex} from "../primitives";
+import {Spacer, Flex, Pad} from "../primitives";
+import styled from "@emotion/styled";
+import {Logo} from "../navigation/Logo";
+import {TextAlignIcon} from "./TextAlignIcon";
+import {LinkIcon} from "./LinkIcon";
+import {FileDocIcon} from "./FileDocIcon";
 
 export const HomePage = () => {
   const navigate = useNavigate()
@@ -23,11 +28,46 @@ export const HomePage = () => {
             </Flex>
         </Flex>
         <Spacer space={172} />
-        <DropInput />
-        {/*<Flex style={{backgroundColor: "#1C40FF"}} width={"100%"} height={"20%"}><p>he</p></Flex>*/}
+        <Flex width={"100%"}
+              flexDirection={"column"}
+              alignItems={"center"}
+              style={{backgroundColor: "#1C40FF", borderRadius: "40px"}}>
+            <Spacer space={50} />
+            <Typography variant={"h1"} style={{color: "#ffffff"}}>Что будем сокращать</Typography>
+            <Spacer space={50} />
+            <ButtonWrap>
+                <Button variant={"contained"}
+                        style={{backgroundColor: "white", color: "black", justifyContent: "space-between", borderRadius: "30px", fontSize: "25px"}}
+                        endIcon={<IconWrap><TextAlignIcon /></IconWrap>}>
+                    <span style={{marginLeft: "10px"}}>Текст</span>     {/* итого отступ от края кнопки 20px */}
+                </Button>
+                <Button variant={"contained"}
+                        style={{backgroundColor: "white", color: "black", justifyContent: "space-between", borderRadius: "30px", fontSize: "25px"}}
+                        endIcon={<IconWrap><LinkIcon /></IconWrap>}>
+                    <span style={{marginLeft: "10px"}}>Ссылку</span>
+                </Button>
+                <Button variant={"contained"}
+                        style={{backgroundColor: "white", color: "black", justifyContent: "space-between", borderRadius: "30px", fontSize: "25px"}}
+                        endIcon={<IconWrap><FileDocIcon /></IconWrap>}>
+                    <span style={{marginLeft: "10px"}}>Документ</span>
+                </Button>
+            </ButtonWrap>
+            <Spacer space={50} />
+        </Flex>
     </div>
   )
 }
+
+const IconWrap = styled.div`
+  margin-right: 10px;
+`
+
+const ButtonWrap = styled.div`
+  display: grid;
+  width: 60%;
+  grid-template-columns: 1fr;
+  row-gap: 12px;
+`
 
 const marks = [
     {

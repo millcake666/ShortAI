@@ -1,8 +1,3 @@
-/* eslint-disable no-constant-condition */
-/* eslint-disable max-len */
-import styled from '@emotion/styled'
-import { useTheme } from '@mui/material'
-
 export const Logo = () => {
   return <div>
             <svg width="116" height="30" viewBox="0 0 116 30" fill="none" xmlns="http://www.w3.org/2000/svg">
