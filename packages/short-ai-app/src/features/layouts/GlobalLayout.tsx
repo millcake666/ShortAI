@@ -17,17 +17,19 @@ export const GlobalLayout = () => {
   return (
     <>
       {!!auth?.token ? (
-        <Container>
-          <Row>
-            <Col>
-              <Navbar />
-              {location.pathname !== ROUTES.HOME && location.pathname !== ROUTES.ROOT && (
-                <BreadNav />
-              )}
-              <Outlet />
-            </Col>
-          </Row>
-        </Container>
+        <div>
+        <Navbar />
+          <Container>
+            <Row>
+              <Col>
+                {location.pathname !== ROUTES.HOME && location.pathname !== ROUTES.ROOT && (
+                  <BreadNav />
+                )}
+                <Outlet />
+              </Col>
+            </Row>
+          </Container>
+        </div>
       ) : (
         <OutletWrapper>
           <Navbar />

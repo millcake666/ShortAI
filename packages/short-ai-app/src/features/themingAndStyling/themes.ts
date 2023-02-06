@@ -230,18 +230,20 @@ export const getDesignTokens = (mode: 'light' | 'dark') =>
       fontWeightExtraBold: 800,
       h1: {
         fontFamily: ['"PlusJakartaSans-ExtraBold"', ...systemFont].join(','),
-        fontSize: 'clamp(2.625rem, 1.2857rem + 3.5714vw, 4rem)',
-        fontWeight: 800,
+        fontSize: '45px',
+        fontWeight: 700,
         lineHeight: 78 / 70,
+        textAlign: "center",
         ...(mode === 'light' && {
           color: blueDark[900]
         })
       },
       h2: {
         fontFamily: ['"PlusJakartaSans-ExtraBold"', ...systemFont].join(','),
-        fontSize: 'clamp(1.5rem, 0.9643rem + 1.4286vw, 2.25rem)',
-        fontWeight: 800,
+        fontSize: '32px',
+        fontWeight: 700,
         lineHeight: 44 / 36,
+        textAlign: "center",
         color: mode === 'dark' ? grey[100] : blueDark[700]
       },
       h3: {
