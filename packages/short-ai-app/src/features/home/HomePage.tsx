@@ -17,13 +17,14 @@ export const HomePage = () => {
 
   return (
     <div>
+        <Spacer space={68} />
         <Typography variant={"h2"}>ShortAI — сервис для сокращения текстовой информации, документов и сайтов с использованием искусственного интеллекта</Typography>
         <Spacer space={50} />
         <Flex alignItems={"center"} flexDirection={"column"}>
             <Typography variant={"body1"}>Как это работает</Typography>
             <Typography variant={"body1"} style={{color: "blue"}}>Потяните ползунок</Typography>
             <Flex width={"30%"}>
-                <Slider defaultValue={2} min={1} max={3} track={false} marks={marks}>
+                <Slider defaultValue={2} min={1} max={3} track={false} marks>
                 </Slider>
             </Flex>
         </Flex>
@@ -69,18 +70,18 @@ const ButtonWrap = styled.div`
   row-gap: 12px;
 `
 
-const marks = [
-    {
-        value: 1,
-        label: "нормальная"
-    },
-    {
-        value: 2,
-        label: "сильная"
-    },
-    {
-        value: 3,
-        label: "максимальная"
-    }
-]
+// const marks = [
+//     {
+//         value: 1,
+//         label: "нормальная"
+//     },
+//     {
+//         value: 2,
+//         label: "сильная"
+//     },
+//     {
+//         value: 3,
+//         label: "максимальная"
+//     }
+// ]
 

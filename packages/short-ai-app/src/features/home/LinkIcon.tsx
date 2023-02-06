@@ -1,5 +1,3 @@
-import styled from "@emotion/styled";
-
 export const LinkIcon = () => {
     return <div>
         <svg width="33" height="33" viewBox="0 0 33 24" fill="none" xmlns="http://www.w3.org/2000/svg">
