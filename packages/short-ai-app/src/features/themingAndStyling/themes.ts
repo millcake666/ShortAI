@@ -97,7 +97,7 @@ const grey = {
 // context on the Advanced Perceptual Contrast Algorithm (APCA) used above here: https://github.com/w3c/wcag/issues/695
 
 const systemFont = [
-  '"Plus Jakarta Sans"',
+  '"SFRounded"',
   '"Helvetica Neue"',
   'Arial',
   'sans-serif',
@@ -215,7 +215,7 @@ export const getDesignTokens = (mode: 'light' | 'dark') =>
     },
     spacing: 10,
     typography: {
-      fontFamily: ['"Plus Jakarta Sans"', ...systemFont].join(','),
+      fontFamily: ['"SFRounded"', ...systemFont].join(','),
       fontFamilyCode: [
         'Consolas',
         'Menlo',
@@ -224,12 +224,12 @@ export const getDesignTokens = (mode: 'light' | 'dark') =>
         'Ubuntu Mono',
         'monospace'
       ].join(','),
-      fontFamilyTagline: ['"PlusJakartaSans-ExtraBold"', ...systemFont].join(','),
+      fontFamilyTagline: ['"SFRounded"', ...systemFont].join(','),
       fontFamilySystem: systemFont.join(','),
       fontWeightSemiBold: 600,
       fontWeightExtraBold: 800,
       h1: {
-        fontFamily: ['"PlusJakartaSans-ExtraBold"', ...systemFont].join(','),
+        fontFamily: ['"SFRounded"', ...systemFont].join(','),
         fontSize: 'clamp(2.625rem, 1.2857rem + 3.5714vw, 4rem)',
         fontWeight: 800,
         lineHeight: 78 / 70,
@@ -238,26 +238,26 @@ export const getDesignTokens = (mode: 'light' | 'dark') =>
         })
       },
       h2: {
-        fontFamily: ['"PlusJakartaSans-ExtraBold"', ...systemFont].join(','),
+        fontFamily: ['"SFRounded"', ...systemFont].join(','),
         fontSize: 'clamp(1.5rem, 0.9643rem + 1.4286vw, 2.25rem)',
         fontWeight: 800,
         lineHeight: 44 / 36,
         color: mode === 'dark' ? grey[100] : blueDark[700]
       },
       h3: {
-        fontFamily: ['"PlusJakartaSans-Bold"', ...systemFont].join(','),
+        fontFamily: ['"SFRounded"', ...systemFont].join(','),
         fontSize: defaultTheme.typography.pxToRem(36),
         lineHeight: 44 / 36,
         letterSpacing: 0.2
       },
       h4: {
-        fontFamily: ['"PlusJakartaSans-Bold"', ...systemFont].join(','),
+        fontFamily: ['"SFRounded"', ...systemFont].join(','),
         fontSize: defaultTheme.typography.pxToRem(28),
         lineHeight: 42 / 28,
         letterSpacing: 0.2
       },
       h5: {
-        fontFamily: ['"PlusJakartaSans-Bold"', ...systemFont].join(','),
+        fontFamily: ['"SFRounded"', ...systemFont].join(','),
         fontSize: defaultTheme.typography.pxToRem(24),
         lineHeight: 36 / 24,
         letterSpacing: 0.1,

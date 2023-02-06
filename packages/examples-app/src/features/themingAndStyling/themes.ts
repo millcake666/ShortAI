@@ -97,7 +97,7 @@ const grey = {
 // context on the Advanced Perceptual Contrast Algorithm (APCA) used above here: https://github.com/w3c/wcag/issues/695
 
 const systemFont = [
-  '"Plus Jakarta Sans"',
+  '"SFRounded"',
   '"Helvetica Neue"',
   'Arial',
   'sans-serif',
@@ -215,7 +215,7 @@ export const getDesignTokens = (mode: 'light' | 'dark') =>
     },
     spacing: 10,
     typography: {
-      fontFamily: ['"Plus Jakarta Sans"', ...systemFont].join(','),
+      fontFamily: ['"SFRounded"', ...systemFont].join(','),
       fontFamilyCode: [
         'Consolas',
         'Menlo',

@@ -1,7 +1,5 @@
 import ArrowForwardRoundedIcon from '@mui/icons-material/ArrowForwardRounded'
 import { Button, Chip, Paper, Stack, TextField, Tooltip, Typography } from '@mui/material'
-import { DndProvider, useDrop } from 'react-dnd'
-import { HTML5Backend } from 'react-dnd-html5-backend'
 import { useDropzone } from 'react-dropzone'
 import { Col, Row } from 'react-grid-system'
 import { useNavigate } from 'react-router-dom'

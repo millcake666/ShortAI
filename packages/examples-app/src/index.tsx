@@ -1,5 +1,3 @@
-import '@fontsource/plus-jakarta-sans/index.css'
-import '@fontsource/plus-jakarta-sans/latin.css'
 import './features/themingAndStyling/index.css'
 
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
