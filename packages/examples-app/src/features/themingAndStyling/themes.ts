@@ -62,8 +62,8 @@ export const blue = {
   200: '#99CCF3',
   300: '#66B2FF',
   400: '#3399FF',
-  main: '#007FFF',
-  500: '#007FFF',
+  main: '#1C40FF',
+  500: '#1C40FF',
   600: '#0072E5', // vs blueDark 900: WCAG 4.6 AAA (large), APCA 36 Not for reading text
   700: '#0059B2',
   800: '#004C99',
@@ -230,8 +230,8 @@ export const getDesignTokens = (mode: 'light' | 'dark') =>
       fontWeightExtraBold: 800,
       h1: {
         fontFamily: ['"PlusJakartaSans-ExtraBold"', ...systemFont].join(','),
-        fontSize: 'clamp(2.625rem, 1.2857rem + 3.5714vw, 4rem)',
-        fontWeight: 800,
+        fontSize: defaultTheme.typography.pxToRem(45),
+        fontWeight: 700,
         lineHeight: 78 / 70,
         ...(mode === 'light' && {
           color: blueDark[900]

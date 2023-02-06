@@ -4,7 +4,6 @@
   "description": "monorepo",
   "private": true,
   "engines": {
-    "node": "^16",
     "yarn": "^1"
   },
   "workspaces": {
@@ -15,6 +14,7 @@
   "types": "./types/index.d.ts",
   "scripts": {
     "dev": "yarn workspace @short-ai/short-ai-app start",
+    "dev:example": "yarn workspace @short-ai/examples-app start",
     "build": "yarn workspace @short-ai/short-ai-app build",
     "dev:landings": "yarn workspace @short-ai/landings dev",
     "build:landings": "yarn workspace @short-ai/landings build",

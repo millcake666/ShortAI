@@ -1,8 +1,9 @@
-import { TextField } from '@mui/material'
+import {Button, TextField, Typography} from '@mui/material'
 import { createRef } from 'react'
 import Dropzone from 'react-dropzone'
 
-import { Spacer } from '../primitives'
+import {Pad, Spacer} from "../primitives";
+import styled from "@emotion/styled";
 
 export const DropInput = () => {
   const dropzoneRef: any = createRef()
@@ -19,25 +20,26 @@ export const DropInput = () => {
           <div className="container">
             <div {...getRootProps({ className: 'dropzone' })}>
               <input {...getInputProps()} />
-              <TextField fullWidth multiline rows={4} defaultValue="" />
-              <p>Drag drop some files here</p>
-              <button type="button" onClick={openDialog}>
-                Open File Dialog
-              </button>
+              <TextField fullWidth multiline rows={4} defaultValue="" placeholder="Начните писать или скопируйте сюда..." />
+              <ButtonWrap>
+                <Button variant="outlined">текст</Button>
+                <Button variant="outlined">ссылку</Button>
+                <Typography fontSize="24px">или</Typography>
+                <Button variant="outlined" onClick={openDialog}>
+                  документ
+                </Button>
+              </ButtonWrap>
             </div>
-            <aside>
-              <h4>Files</h4>
-              <ul>
-                {acceptedFiles.map((file: any) => (
-                  <li key={file.path}>
-                    {file.path} - {file.size} bytes
-                  </li>
-                ))}
-              </ul>
-            </aside>
           </div>
         )
       }}
     </Dropzone>
   )
 }
+
+const ButtonWrap = styled.div`
+  display: flex;
+  column-gap: 7px;
+  justify-content: end;
+  padding-top: 14px;
+`

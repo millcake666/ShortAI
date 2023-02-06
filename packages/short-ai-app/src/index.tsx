@@ -23,7 +23,7 @@ import { routes } from './routes'
 setConfiguration({
   gutterWidth: 20,
   breakpoints: BREAKPOINTS,
-  containerWidths: [540, 740, 1100, 1280, 1540, 1810]
+  containerWidths: [540, 740, 800, 800, 800, 800]
 })
 
 const queryClient = new QueryClient({
