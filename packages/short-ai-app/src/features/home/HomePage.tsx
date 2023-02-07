@@ -9,7 +9,8 @@ import {
   Slider,
   Stack,
   Tooltip,
-  Typography
+  Typography,
+  useTheme
 } from '@mui/material'
 import { Col, Row } from 'react-grid-system'
 import { useNavigate } from 'react-router-dom'
@@ -24,6 +25,7 @@ import { TextAlignIcon } from './TextAlignIcon'
 
 export const HomePage = () => {
   const navigate = useNavigate()
+  const theme = useTheme()
 
   return (
     <div>
@@ -47,7 +49,7 @@ export const HomePage = () => {
         width={'100%'}
         flexDirection={'column'}
         alignItems={'center'}
-        style={{ backgroundColor: '#1C40FF', borderRadius: '40px' }}
+        style={{ backgroundColor: theme.palette.primary.main, borderRadius: '40px' }}
       >
         <Spacer space={50} />
         <Typography variant={'h1'} style={{ color: '#ffffff' }}>

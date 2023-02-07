@@ -3,6 +3,7 @@ import { HomePage } from './features/home/HomePage'
 import { ForgotPasswordPage } from './features/login/ForgotPasswordPage'
 import { LoginPage } from './features/login/LoginPage'
 import { RegPage } from './features/reg/RegPage'
+import { UIkitTestPage } from './features/uikitTesting/UIkitTestPage'
 
 export const routes = [
   {
@@ -26,6 +27,13 @@ export const routes = [
   {
     element: <HomePage />,
     path: ROUTES.ROOT,
+    privatePage: true,
+    featureActive: true
+  },
+
+  {
+    element: <UIkitTestPage />,
+    path: '/ui_test',
     privatePage: true,
     featureActive: true
   }

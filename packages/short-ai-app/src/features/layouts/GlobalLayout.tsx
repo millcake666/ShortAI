@@ -18,13 +18,10 @@ export const GlobalLayout = () => {
     <>
       {!!auth?.token ? (
         <div>
-        <Navbar />
+          <Navbar />
           <Container>
             <Row>
               <Col>
-                {location.pathname !== ROUTES.HOME && location.pathname !== ROUTES.ROOT && (
-                  <BreadNav />
-                )}
                 <Outlet />
               </Col>
             </Row>

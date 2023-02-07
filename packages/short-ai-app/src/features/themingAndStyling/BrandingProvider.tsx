@@ -1,10 +1,12 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import { CssBaseline, GlobalStyles, PaletteMode } from '@mui/material'
 import { createTheme, ThemeProvider, useTheme } from '@mui/material/styles'
-import { deepmerge } from '@mui/utils'
+// import { deepmerge } from '@mui/utils'
 import React from 'react'
 
-import { getDesignTokens, getThemedComponents } from './themes'
+import { darkTheme, lightTheme } from './theme'
+
+// import { getDesignTokens, getThemedComponents } from './themes'
 
 export const ColorModeContext = React.createContext({ toggleColorMode: () => {} })
 
@@ -33,10 +35,10 @@ export default function BrandingProvider({ children, mode: modeProp }: BrandingP
   )
 
   const theme = React.useMemo(() => {
-    const designTokens = getDesignTokens(mode)
-    let newTheme = createTheme(designTokens)
-    newTheme = deepmerge(newTheme, getThemedComponents(newTheme))
-    return newTheme
+    // const designTokens = getDesignTokens(mode)
+    // let newTheme = createTheme(designTokens)
+    // newTheme = deepmerge(newTheme, getThemedComponents(newTheme))
+    return mode === 'light' ? lightTheme : darkTheme
   }, [mode])
 
   return (

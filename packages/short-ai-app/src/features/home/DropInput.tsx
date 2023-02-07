@@ -1,9 +1,9 @@
-import {Button, TextField, Typography} from '@mui/material'
+import styled from '@emotion/styled'
+import { Button, TextField, Typography } from '@mui/material'
 import { createRef } from 'react'
 import Dropzone from 'react-dropzone'
 
-import {Pad, Spacer} from "../primitives";
-import styled from "@emotion/styled";
+import { Pad, Spacer } from '../primitives'
 
 export const DropInput = () => {
   const dropzoneRef: any = createRef()
@@ -20,7 +20,13 @@ export const DropInput = () => {
           <div className="container">
             <div {...getRootProps({ className: 'dropzone' })}>
               <input {...getInputProps()} />
-              <TextField fullWidth multiline rows={4} defaultValue="" placeholder="Начните писать или скопируйте сюда..." />
+              <TextField
+                fullWidth
+                multiline
+                rows={4}
+                defaultValue=""
+                placeholder="Начните писать или скопируйте сюда..."
+              />
               <ButtonWrap>
                 <Button variant="outlined">текст</Button>
                 <Button variant="outlined">ссылку</Button>
