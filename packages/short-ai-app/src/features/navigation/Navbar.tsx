@@ -1,12 +1,9 @@
 /* eslint-disable no-extra-boolean-cast */
 import styled from '@emotion/styled'
-import { Logout, PersonAdd, Settings } from '@mui/icons-material'
 import {
-  Avatar,
   Box,
   Button,
   Divider,
-  Icon,
   IconButton,
   ListItemIcon,
   Menu,
@@ -17,14 +14,18 @@ import {
 } from '@mui/material'
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import style from 'react-scrollbars-custom/dist/types/style'
-import { shiftRight } from 'three/examples/jsm/nodes/shadernode/ShaderNodeBaseElements'
 
 import { ROUTES } from '../../consts/routes'
 import { AuthProvider, useAuth } from '../auth/AuthProvider'
 import { Flex, Pad, Spacer } from '../primitives'
 import { AvatarIcon } from './AvatarIcon'
 import { Logo } from './Logo'
+import {blue} from "../themingAndStyling/theme";
+import {HistIcon} from "./HistIcon";
+import {BookmarkIcon} from "./BookmarkIcon";
+import {DarkmodeIcon} from "./DarkmodeIcon";
+import {LogoutIcon} from "./LogoutIcon";
+import {grey} from "@mui/material/colors";
 
 export const Navbar = () => {
   const navigate = useNavigate()
@@ -33,19 +34,17 @@ export const Navbar = () => {
   return (
     <div>
       <NavWrap id="main_navbar">
-        <Flex as="button" onClick={() => navigate(ROUTES.HOME)}>
+        <Flex as="button" onClick={() => navigate(ROUTES.HOME)} alignItems={'center'}>
           <Logo />
         </Flex>
         {auth.token ? (
           <MenuBar />
         ) : (
           <Button
-            variant="contained"
-            color="secondary"
-            size="small"
+            size={"small"}
             onClick={() => navigate(ROUTES.LOGIN)}
-          >
-            Войти
+            style={{backgroundColor: blue[100], color: blue[500]}}>
+              Войти
           </Button>
         )}
       </NavWrap>
@@ -73,72 +72,49 @@ const MenuBar = () => {
             sx={{ ml: 2 }}
             aria-controls={open ? 'account-menu' : undefined}
             aria-haspopup="true"
-            aria-expanded={open ? 'true' : undefined}
-          >
-            <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
+            aria-expanded={open ? 'true' : undefined}>
+            <AvatarIcon />
           </IconButton>
         </Tooltip>
       </Box>
       <Menu
         sx={{ backdropFilter: 'blur(0px)' }}
         anchorEl={anchorEl}
-        id="account-menu"
+        id="basic-menu"
         open={open}
         onClose={handleClose}
-        onClick={handleClose}
-        PaperProps={{
-          elevation: 0,
-          sx: {
-            overflow: 'visible',
-            filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
-            mt: 1.5,
-            '& .MuiAvatar-root': {
-              width: 32,
-              height: 32,
-              ml: -0.5,
-              mr: 1
-            },
-            '&:before': {
-              content: '""',
-              display: 'block',
-              position: 'absolute',
-              top: 0,
-              right: 14,
-              width: 10,
-              height: 10,
-              bgcolor: 'background.paper',
-              transform: 'translateY(-50%) rotate(45deg)',
-              zIndex: 0
-            }
-          }
-        }}
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+        style={{borderRadius: '10px !important'}}
       >
-        <MenuItem onClick={handleClose}>
-          <Avatar /> Profile
-        </MenuItem>
-        <MenuItem onClick={handleClose}>
-          <Avatar /> My account
-        </MenuItem>
-        <Divider />
+        <Spacer space={10} />
+        <Typography textAlign={'center'}>email_adress@gmail.com</Typography>
+        <Spacer space={10} />
+        <Divider variant={'middle'} />
         <MenuItem onClick={handleClose}>
           <ListItemIcon>
-            <PersonAdd fontSize="small" />
+            <HistIcon />
           </ListItemIcon>
-          Add another account
+          <Typography variant={'body1'} color={grey[600]}>История</Typography>
         </MenuItem>
         <MenuItem onClick={handleClose}>
           <ListItemIcon>
-            <Settings fontSize="small" />
+            <BookmarkIcon />
           </ListItemIcon>
-          Settings
+          <Typography variant={'body1'} color={grey[600]}>Сохраненные текста</Typography>
+        </MenuItem>
+        <MenuItem>
+          <ListItemIcon>
+            <DarkmodeIcon />
+          </ListItemIcon>
+          <Typography variant={'body1'} color={grey[600]}>Темная тема</Typography>
+          <Pad pad={'0 0 0 20px'}><Switch size={'small'}/></Pad>
         </MenuItem>
         <MenuItem onClick={handleClose}>
           <ListItemIcon>
-            <Logout fontSize="small" />
+            <LogoutIcon />
           </ListItemIcon>
-          Logout
+          <Typography variant={'body1'} color={grey[600]}>Выход</Typography>
         </MenuItem>
       </Menu>
     </div>

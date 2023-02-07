@@ -1,5 +1,4 @@
-import { Subtitles } from '@mui/icons-material'
-import { createTheme, ThemeOptions } from '@mui/material'
+import {createTheme, ThemeOptions} from '@mui/material'
 
 import { BREAKPOINTS } from '../../consts/common'
 
@@ -130,12 +129,14 @@ export const themeOptions: ThemeOptions = {
       fontWeight: 400
     },
     body1: {
-      fontSize: 17,
-      fontWeight: 400
+      fontSize: 14,
+      fontWeight: 600,
+      color: '#000'
     },
     body2: {
-      fontSize: 16,
-      fontWeight: 400
+      fontSize: 14,
+      fontWeight: 600,
+      color: blue[500]
     },
     button: {
       fontSize: 18,
@@ -176,51 +177,56 @@ export const themeOptions: ThemeOptions = {
   components: {
     MuiButton: {
       styleOverrides: {
+        sizeLarge: {
+          padding: '10px 20px',
+          justifyContent: 'space-between',
+          fontSize: '22px',
+          fontWeight: 600,
+          borderRadius: '30px',
+          '&:hover': {
+            backgroundColor: '#DCDCDE'
+          }
+        },
+        sizeMedium: {
+
+        },
         sizeSmall: {
           padding: '6px 16px',
+          height: '42px',
           fontSize: 16,
+          fontWeight: 500,
           borderRadius: 25,
-          boxShadow: 'none',
-          textTransform: 'none',
-          height: 34,
           '&:hover': {
-            boxShadow: 'none',
             backgroundColor: blue[400]
           }
         },
-        containedSecondary: {
-          color: blue[500]
-        },
-        outlinedSecondary: {
-          color: blue[500]
+        outlined: {
+          backgroundColor: '#fff',
+          border: '',
         },
         root: {
           padding: '8px 20px',
           fontSize: 25,
           fontWeight: '600',
           borderRadius: 25,
+          backgroundColor: '#fff',
+          color: '#000',
           boxShadow: 'none',
-          height: 56,
-          textTransform: 'none',
-          '&:hover': {
-            boxShadow: 'none',
-            backgroundColor: blue[400],
-            color: '#fff!important'
-          }
+          textTransform: 'none'
         }
       }
     },
     MuiSwitch: {
       styleOverrides: {
         root: {
-          width: 42,
-          height: 26,
+          width: 36,
+          height: 20,
           padding: 0,
-          margin: 8
+          margin: 2,
         },
         switchBase: {
-          padding: 1,
-          '&$checked, &$colorPrimary$checked, &$colorSecondary$checked': {
+          padding: '2px !important',
+          '&checked, &$colorPrimary$checked, &$colorSecondary$checked': {
             transform: 'translateX(16px)',
             color: '#fff',
             '& + $track': {
@@ -235,11 +241,10 @@ export const themeOptions: ThemeOptions = {
         },
         track: {
           borderRadius: 13,
-          border: '1px solid #bdbdbd',
-          backgroundColor: '#fafafa',
+          backgroundColor: '#dcdcde',
           opacity: 1,
           transition:
-            'background-color 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms'
+            'background-color 300ms cubic-bezier(0.4, 0, 0.2, 0.5) 0ms,border 300ms cubic-bezier(0.4, 0, 0.2, 0.5) 0ms !important'
         }
       }
     }

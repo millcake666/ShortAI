@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 export const Logo = () => {
   return (
-    <div>
+    <div style={{height: '30px'}}>
       <svg
         width="116"
         height="30"

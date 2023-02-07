@@ -22,6 +22,7 @@ import { DropInput } from './DropInput'
 import { FileDocIcon } from './FileDocIcon'
 import { LinkIcon } from './LinkIcon'
 import { TextAlignIcon } from './TextAlignIcon'
+import {ScrollToTop} from "../navigation/ScrollToTop";
 
 export const HomePage = () => {
   const navigate = useNavigate()
@@ -29,22 +30,20 @@ export const HomePage = () => {
 
   return (
     <div>
-      <Spacer space={68} />
-      <Typography variant={'h2'}>
+      <Typography variant={'h2'} alignItems={'center'} textAlign={'center'}>
         ShortAI — сервис для сокращения текстовой информации, документов и сайтов с использованием
         искусственного интеллекта
       </Typography>
-      <Spacer space={50} />
+      <Spacer space={30} />
       <Flex alignItems={'center'} flexDirection={'column'}>
-        <Typography variant={'body1'}>Как это работает</Typography>
-        <Typography variant={'body1'} style={{ color: 'blue' }}>
-          Потяните ползунок
-        </Typography>
+        <Typography variant={'body1'}>Как это работает?</Typography>
+        <Typography variant={'body2'}>Потяните ползунок</Typography>
+        <Spacer space={10} />
         <Flex width={'30%'}>
           <Slider defaultValue={2} min={1} max={3} track={false} marks />
         </Flex>
       </Flex>
-      <Spacer space={172} />
+      <Spacer space={130} />
       <Flex
         width={'100%'}
         flexDirection={'column'}
@@ -52,62 +51,22 @@ export const HomePage = () => {
         style={{ backgroundColor: theme.palette.primary.main, borderRadius: '40px' }}
       >
         <Spacer space={50} />
-        <Typography variant={'h1'} style={{ color: '#ffffff' }}>
+        <Typography variant={'h1'} style={{color: '#ffffff'}} textAlign={'center'}>
           Что будем сокращать
         </Typography>
         <Spacer space={50} />
         <ButtonWrap>
-          <Button
-            variant={'contained'}
-            style={{
-              backgroundColor: 'white',
-              color: 'black',
-              justifyContent: 'space-between',
-              borderRadius: '30px',
-              fontSize: '25px'
-            }}
-            endIcon={
-              <IconWrap>
-                <TextAlignIcon />
-              </IconWrap>
-            }
-          >
-            <span style={{ marginLeft: '10px' }}>Текст</span>{' '}
-            {/* итого отступ от края кнопки 20px */}
+          <Button size={'large'}
+                  endIcon={ <TextAlignIcon /> }>
+              Текст
           </Button>
-          <Button
-            variant={'contained'}
-            style={{
-              backgroundColor: 'white',
-              color: 'black',
-              justifyContent: 'space-between',
-              borderRadius: '30px',
-              fontSize: '25px'
-            }}
-            endIcon={
-              <IconWrap>
-                <LinkIcon />
-              </IconWrap>
-            }
-          >
-            <span style={{ marginLeft: '10px' }}>Ссылку</span>
+          <Button size={'large'}
+                  endIcon={ <LinkIcon /> }>
+              Ссылку
           </Button>
-          <Button
-            variant={'contained'}
-            style={{
-              backgroundColor: 'white',
-              color: 'black',
-              justifyContent: 'space-between',
-              borderRadius: '30px',
-              fontSize: '25px'
-            }}
-            endIcon={
-              <IconWrap>
-                <FileDocIcon />
-              </IconWrap>
-            }
-          >
-            <span style={{ marginLeft: '10px' }}>Документ</span>
+          <Button size={'large'}
+                  endIcon={ <FileDocIcon /> }>
+              Документ
           </Button>
         </ButtonWrap>
         <Spacer space={50} />
@@ -116,14 +75,10 @@ export const HomePage = () => {
   )
 }
 
-const IconWrap = styled.div`
-  margin-right: 10px;
-`
-
 const ButtonWrap = styled.div`
-  display: grid;
+  display: flex;
   width: 60%;
-  grid-template-columns: 1fr;
+  flex-direction: column;
   row-gap: 12px;
 `
 

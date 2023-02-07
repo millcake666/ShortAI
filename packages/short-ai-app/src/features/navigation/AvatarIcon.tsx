@@ -1,5 +1,5 @@
 export const AvatarIcon = () => {
-    return <div>
+    return <div style={{height: '48px'}}>
         <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="24" cy="24" r="24" fill="#4D5DEE"/>
             <circle cx="23.9993" cy="17.0003" r="9.33333" fill="#F1F2FE"/>
