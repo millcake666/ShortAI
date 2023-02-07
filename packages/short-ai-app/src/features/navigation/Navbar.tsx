@@ -20,12 +20,13 @@ import { AuthProvider, useAuth } from '../auth/AuthProvider'
 import { Flex, Pad, Spacer } from '../primitives'
 import { AvatarIcon } from './AvatarIcon'
 import { Logo } from './Logo'
-import {blue} from "../themingAndStyling/theme";
+import {blue, darkTheme} from "../themingAndStyling/theme";
 import {HistIcon} from "./HistIcon";
 import {BookmarkIcon} from "./BookmarkIcon";
 import {DarkmodeIcon} from "./DarkmodeIcon";
 import {LogoutIcon} from "./LogoutIcon";
 import {grey} from "@mui/material/colors";
+import {AvatarIcon36} from "./AvatarIcon36";
 
 export const Navbar = () => {
   const navigate = useNavigate()
@@ -53,6 +54,8 @@ export const Navbar = () => {
 }
 
 const MenuBar = () => {
+  const navigate = useNavigate()
+
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
   const open = Boolean(anchorEl)
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -73,7 +76,7 @@ const MenuBar = () => {
             aria-controls={open ? 'account-menu' : undefined}
             aria-haspopup="true"
             aria-expanded={open ? 'true' : undefined}>
-            <AvatarIcon />
+            <AvatarIcon36 />
           </IconButton>
         </Tooltip>
       </Box>
@@ -82,6 +85,7 @@ const MenuBar = () => {
         anchorEl={anchorEl}
         id="basic-menu"
         open={open}
+        onClick={handleClose}
         onClose={handleClose}
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
@@ -91,13 +95,13 @@ const MenuBar = () => {
         <Typography textAlign={'center'}>email_adress@gmail.com</Typography>
         <Spacer space={10} />
         <Divider variant={'middle'} />
-        <MenuItem onClick={handleClose}>
+        <MenuItem onClick={() => navigate(ROUTES.HIST)}>
           <ListItemIcon>
             <HistIcon />
           </ListItemIcon>
           <Typography variant={'body1'} color={grey[600]}>История</Typography>
         </MenuItem>
-        <MenuItem onClick={handleClose}>
+        <MenuItem onClick={() => navigate(ROUTES.HIST)}>
           <ListItemIcon>
             <BookmarkIcon />
           </ListItemIcon>

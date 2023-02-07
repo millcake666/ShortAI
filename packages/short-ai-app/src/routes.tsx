@@ -3,7 +3,10 @@ import { HomePage } from './features/home/HomePage'
 import { ForgotPasswordPage } from './features/login/ForgotPasswordPage'
 import { LoginPage } from './features/login/LoginPage'
 import { RegPage } from './features/reg/RegPage'
-import { UIkitTestPage } from './features/uikitTesting/UIkitTestPage'
+import { TextPage } from './features/textPage/TextPage'
+import { LinkPage } from './features/linkPage/LinkPage'
+import { FilePage } from './features/filePage/FilePage'
+import { HistPage } from './features/hist/HistPage'
 
 export const routes = [
   {
@@ -30,11 +33,28 @@ export const routes = [
     privatePage: true,
     featureActive: true
   },
-
   {
-    element: <UIkitTestPage />,
-    path: '/ui_test',
+    element: <HistPage />,
+    path: ROUTES.HIST,
     privatePage: true,
+    featureActive: true
+  },
+  {
+    element: <TextPage />,
+    path: ROUTES.TEXT,
+    privatePage: false,
+    featureActive: true
+  },
+  {
+    element: <LinkPage />,
+    path: ROUTES.LINK,
+    privatePage: false,
+    featureActive: true
+  },
+  {
+    element: <FilePage />,
+    path: ROUTES.FILE,
+    privatePage: false,
     featureActive: true
   }
 ]

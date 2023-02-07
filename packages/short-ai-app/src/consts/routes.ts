@@ -3,5 +3,8 @@ export const ROUTES = {
   HOME: '/home',
   LOGIN: '/login',
   REG: '/register',
-  HIST: '/history'
+  HIST: '/history',
+  TEXT: '/text',
+  LINK: '/link',
+  FILE: '/file'
 }

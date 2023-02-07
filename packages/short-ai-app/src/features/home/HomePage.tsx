@@ -57,14 +57,17 @@ export const HomePage = () => {
         <Spacer space={50} />
         <ButtonWrap>
           <Button size={'large'}
+                  onClick={() => navigate(ROUTES.TEXT)}
                   endIcon={ <TextAlignIcon /> }>
               Текст
           </Button>
           <Button size={'large'}
+                  onClick={() => navigate(ROUTES.LINK)}
                   endIcon={ <LinkIcon /> }>
               Ссылку
           </Button>
           <Button size={'large'}
+                  onClick={() => navigate(ROUTES.FILE)}
                   endIcon={ <FileDocIcon /> }>
               Документ
           </Button>
