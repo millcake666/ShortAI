@@ -1,4 +1,5 @@
 import styled from '@emotion/styled'
+import React from 'react'
 import ArrowForwardRoundedIcon from '@mui/icons-material/ArrowForwardRounded'
 import {
   Box,
@@ -24,25 +25,41 @@ import { LinkIcon } from './LinkIcon'
 import { TextAlignIcon } from './TextAlignIcon'
 import {ScrollToTop} from "../navigation/ScrollToTop";
 
+
+const varText = [
+    'ShortAI — онлайн сервис для сокращения текстовой информации, документов и сайтов с использованием искусственного интеллекта',
+    'ShortAI — сервис, сокращающий текстовую информацию с сайтов и документов',
+    'ShortAI - сокращает текста с сайтов и документов'
+]
+
 export const HomePage = () => {
   const navigate = useNavigate()
   const theme = useTheme()
 
+  const [value, setValue] = React.useState<number>(1);
+  const handleChange = (event: Event, newValue: number | number[]) => {
+      if (typeof newValue === 'number') {
+          setValue(newValue);
+      }
+  }
+
+
   return (
     <div>
-      <Typography variant={'h2'} alignItems={'center'} textAlign={'center'}>
-        ShortAI — сервис для сокращения текстовой информации, документов и сайтов с использованием
-        искусственного интеллекта
-      </Typography>
-      <Spacer space={30} />
-      <Flex alignItems={'center'} flexDirection={'column'}>
-        <Typography variant={'body1'}>Как это работает?</Typography>
-        <Typography variant={'body2'}>Потяните ползунок</Typography>
-        <Spacer space={10} />
-        <Flex width={'30%'}>
-          <Slider defaultValue={2} min={1} max={3} track={false} marks />
+        <Flex flexDirection={'column'} justifyContent={"space-between"}>
+          <Typography variant={'h2'} alignItems={'center'} textAlign={'center'}>
+            {varText[value]}
+          </Typography>
+          <Spacer space={30} />
+          <Flex alignItems={'center'} flexDirection={'column'}>
+            <Typography variant={'body1'}>Как это работает?</Typography>
+            <Typography variant={'body2'}>Потяните ползунок</Typography>
+            <Spacer space={10} />
+            <Flex width={'30%'}>
+              <Slider defaultValue={1} min={0} max={2} track={false} marks onChange={handleChange} />
+            </Flex>
+          </Flex>
         </Flex>
-      </Flex>
       <Spacer space={130} />
       <Flex
         width={'100%'}

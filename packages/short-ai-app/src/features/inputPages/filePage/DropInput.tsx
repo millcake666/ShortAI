@@ -24,7 +24,7 @@ export const DropInput = () => {
             <Wrap {...getRootProps({ className: 'dropzone' })}>
               <input {...getInputProps()} />
               <UploadIcon />
-              <Typography variant={'h2'} color={grey[400]}>Перетащите файл сюда или</Typography>
+              <Typography variant={'h2'} color={grey[400]} textAlign={'center'}>Перетащите файл сюда или</Typography>
               <Button size={'small'}
                       variant={'outlined'}
                       onClick={openDialog}>
