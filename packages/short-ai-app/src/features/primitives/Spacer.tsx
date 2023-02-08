@@ -15,7 +15,7 @@ export const Spacer: React.FC<IProps> = ({
   space = DEFAULT_SPACE,
   width = DEFAULT_WIDTH,
   mobSpace = DEFAULT_SPACE,
-  isMobile = false,
+  isMobile = true,
   ...rest
 }) => (
   <InnerSpacer

@@ -58,7 +58,7 @@ export const HomePage = () => {
           </Flex>
         </Flex>
       </Flex>
-      <Spacer space={130} />
+      <Spacer space={130} mobSpace={20} />
       <Flex
         width={'100%'}
         flexDirection={'column'}
