@@ -39,12 +39,12 @@ export const Navbar = () => {
           <Logo />
         </Flex>
         {auth.token ? (
-          <MenuBar />
+          <AvatarMenu />
         ) : (
           <Button
             size={"small"}
             onClick={() => navigate(ROUTES.LOGIN)}
-            style={{backgroundColor: blue[100], color: blue[500]}}>
+            style={{backgroundColor: blue[100], color: blue[500], borderColor: blue[500]}}>
               Войти
           </Button>
         )}
@@ -53,7 +53,7 @@ export const Navbar = () => {
   )
 }
 
-const MenuBar = () => {
+const AvatarMenu = () => {
   const navigate = useNavigate()
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
@@ -121,6 +121,7 @@ const MenuBar = () => {
           <Typography variant={'body1'} color={grey[600]}>Выход</Typography>
         </MenuItem>
       </Menu>
+
     </div>
   )
 }

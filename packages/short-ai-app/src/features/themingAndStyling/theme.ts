@@ -188,7 +188,9 @@ export const themeOptions: ThemeOptions = {
           }
         },
         sizeMedium: {
-
+          height: '50px',
+          fontSize: '20px',
+          fontWeight: 600
         },
         sizeSmall: {
           padding: '6px 16px',
@@ -204,6 +206,12 @@ export const themeOptions: ThemeOptions = {
           backgroundColor: '#fff',
           border: '',
           borderColor: '#000'
+        },
+        contained: {
+          backgroundColor: blue[500],
+          padding: '13px 30px',
+          borderRadius: '35px',
+          color: '#fff'
         },
         root: {
           padding: '8px 20px',

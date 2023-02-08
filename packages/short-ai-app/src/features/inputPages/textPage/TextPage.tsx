@@ -2,7 +2,7 @@ import React from 'react'
 import {Button, TextField, Typography} from "@mui/material";
 import styled from "@emotion/styled";
 import { Flex, Pad, Spacer } from '../../primitives'
-import {InputMenu} from "../inputMenu/InputMenu";
+import {InputBar} from "../inputBar/InputBar";
 
 
 export const TextPage = () => {
@@ -10,7 +10,7 @@ export const TextPage = () => {
 
     return (
         <div>
-            {InputMenu('text')}
+            {InputBar('text')}
             <Spacer space={40} />
             <TextField
                 fullWidth
