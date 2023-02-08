@@ -1,4 +1,4 @@
-import {createTheme, ThemeOptions} from '@mui/material'
+import { createTheme, ThemeOptions } from '@mui/material'
 
 import { BREAKPOINTS } from '../../consts/common'
 
@@ -231,7 +231,7 @@ export const themeOptions: ThemeOptions = {
           width: 36,
           height: 20,
           padding: 0,
-          margin: 2,
+          margin: 2
         },
         switchBase: {
           padding: '2px !important',
@@ -254,6 +254,28 @@ export const themeOptions: ThemeOptions = {
           opacity: 1,
           transition:
             'background-color 300ms cubic-bezier(0.4, 0, 0.2, 0.5) 0ms,border 300ms cubic-bezier(0.4, 0, 0.2, 0.5) 0ms !important'
+        }
+      }
+    },
+    MuiSlider: {
+      styleOverrides: {
+        root: {},
+        trackFalse: {
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center'
+        },
+        mark: {
+          height: 8
+        },
+        rail: {
+          height: 24,
+          backgroundColor: '#F0F2FF',
+          padding: '0 10px'
+        },
+        thumb: {
+          height: 16,
+          width: 16
         }
       }
     }

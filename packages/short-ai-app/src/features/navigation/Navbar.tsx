@@ -12,21 +12,21 @@ import {
   Tooltip,
   Typography
 } from '@mui/material'
+import { grey } from '@mui/material/colors'
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
 import { ROUTES } from '../../consts/routes'
 import { AuthProvider, useAuth } from '../auth/AuthProvider'
 import { Flex, Pad, Spacer } from '../primitives'
+import { blue, darkTheme } from '../themingAndStyling/theme'
 import { AvatarIcon } from './AvatarIcon'
+import { AvatarIcon36 } from './AvatarIcon36'
+import { BookmarkIcon } from './BookmarkIcon'
+import { DarkmodeIcon } from './DarkmodeIcon'
+import { HistIcon } from './HistIcon'
 import { Logo } from './Logo'
-import {blue, darkTheme} from "../themingAndStyling/theme";
-import {HistIcon} from "./HistIcon";
-import {BookmarkIcon} from "./BookmarkIcon";
-import {DarkmodeIcon} from "./DarkmodeIcon";
-import {LogoutIcon} from "./LogoutIcon";
-import {grey} from "@mui/material/colors";
-import {AvatarIcon36} from "./AvatarIcon36";
+import { LogoutIcon } from './LogoutIcon'
 
 export const Navbar = () => {
   const navigate = useNavigate()
@@ -42,13 +42,15 @@ export const Navbar = () => {
           <AvatarMenu />
         ) : (
           <Button
-            size={"small"}
+            size={'small'}
             onClick={() => navigate(ROUTES.LOGIN)}
-            style={{backgroundColor: blue[100], color: blue[500], borderColor: blue[500]}}>
-              Войти
+            style={{ backgroundColor: blue[100], color: blue[500], borderColor: blue[500] }}
+          >
+            Войти
           </Button>
         )}
       </NavWrap>
+      <Spacer />
     </div>
   )
 }
@@ -75,7 +77,8 @@ const AvatarMenu = () => {
             sx={{ ml: 2 }}
             aria-controls={open ? 'account-menu' : undefined}
             aria-haspopup="true"
-            aria-expanded={open ? 'true' : undefined}>
+            aria-expanded={open ? 'true' : undefined}
+          >
             <AvatarIcon36 />
           </IconButton>
         </Tooltip>
@@ -89,7 +92,7 @@ const AvatarMenu = () => {
         onClose={handleClose}
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
-        style={{borderRadius: '10px !important'}}
+        style={{ borderRadius: '10px !important' }}
       >
         <Spacer space={10} />
         <Typography textAlign={'center'}>email_adress@gmail.com</Typography>
@@ -99,29 +102,38 @@ const AvatarMenu = () => {
           <ListItemIcon>
             <HistIcon />
           </ListItemIcon>
-          <Typography variant={'body1'} color={grey[600]}>История</Typography>
+          <Typography variant={'body1'} color={grey[600]}>
+            История
+          </Typography>
         </MenuItem>
         <MenuItem onClick={() => navigate(ROUTES.HIST)}>
           <ListItemIcon>
             <BookmarkIcon />
           </ListItemIcon>
-          <Typography variant={'body1'} color={grey[600]}>Сохраненные текста</Typography>
+          <Typography variant={'body1'} color={grey[600]}>
+            Сохраненные текста
+          </Typography>
         </MenuItem>
         <MenuItem>
           <ListItemIcon>
             <DarkmodeIcon />
           </ListItemIcon>
-          <Typography variant={'body1'} color={grey[600]}>Темная тема</Typography>
-          <Pad pad={'0 0 0 20px'}><Switch size={'small'}/></Pad>
+          <Typography variant={'body1'} color={grey[600]}>
+            Темная тема
+          </Typography>
+          <Pad pad={'0 0 0 20px'}>
+            <Switch size={'small'} />
+          </Pad>
         </MenuItem>
         <MenuItem onClick={handleClose}>
           <ListItemIcon>
             <LogoutIcon />
           </ListItemIcon>
-          <Typography variant={'body1'} color={grey[600]}>Выход</Typography>
+          <Typography variant={'body1'} color={grey[600]}>
+            Выход
+          </Typography>
         </MenuItem>
       </Menu>
-
     </div>
   )
 }

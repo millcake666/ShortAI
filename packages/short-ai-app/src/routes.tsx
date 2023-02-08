@@ -1,12 +1,12 @@
 import { ROUTES } from './consts/routes'
+import { HistPage } from './features/hist/HistPage'
 import { HomePage } from './features/home/HomePage'
+import { FilePage } from './features/inputPages/filePage/FilePage'
+import { LinkPage } from './features/inputPages/linkPage/LinkPage'
+import { TextPage } from './features/inputPages/textPage/TextPage'
 import { ForgotPasswordPage } from './features/login/ForgotPasswordPage'
 import { LoginPage } from './features/login/LoginPage'
 import { RegPage } from './features/reg/RegPage'
-import { TextPage } from './features/inputPages/textPage/TextPage'
-import { LinkPage } from './features/inputPages/linkPage/LinkPage'
-import { FilePage } from './features/inputPages/filePage/FilePage'
-import { HistPage } from './features/hist/HistPage'
 
 export const routes = [
   {

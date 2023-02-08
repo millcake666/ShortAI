@@ -1,31 +1,30 @@
+import styled from '@emotion/styled'
+import { Button, InputAdornment, TextField, Typography } from '@mui/material'
 import React from 'react'
-import {Button, InputAdornment, TextField, Typography} from "@mui/material";
-import styled from "@emotion/styled";
-import { Flex, Pad, Spacer } from '../../primitives'
-import {InputBar} from "../inputBar/InputBar";
-import {LinkMicroIcon} from "../icon/LinkMicroIcon";
 
+import { Spacer } from '../../primitives'
+import { LinkMicroIcon } from '../icon/LinkMicroIcon'
+import { InputBar } from '../inputBar/InputBar'
 
 export const LinkPage = () => {
-
-    return (
-        <div>
-            {InputBar('link')}
-            <Spacer space={40} />
-            <TextField
-                fullWidth
-                multiline
-                rows={2}
-                defaultValue=""
-                placeholder="Вставьте сюда ссылку"
-                InputProps={{
-                    startAdornment: (
-                        <InputAdornment position={'start'}>
-                            <LinkMicroIcon />
-                        </InputAdornment>
-                    )
-                }}
-            />
-        </div>
-    )
+  return (
+    <div>
+      {InputBar('link')}
+      <Spacer space={20} />
+      <TextField
+        fullWidth
+        multiline
+        rows={2}
+        defaultValue=""
+        placeholder="Вставьте сюда ссылку"
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position={'start'}>
+              <LinkMicroIcon />
+            </InputAdornment>
+          )
+        }}
+      />
+    </div>
+  )
 }
