@@ -3,9 +3,9 @@ import { HomePage } from './features/home/HomePage'
 import { ForgotPasswordPage } from './features/login/ForgotPasswordPage'
 import { LoginPage } from './features/login/LoginPage'
 import { RegPage } from './features/reg/RegPage'
-import { TextPage } from './features/textPage/TextPage'
-import { LinkPage } from './features/linkPage/LinkPage'
-import { FilePage } from './features/filePage/FilePage'
+import { TextPage } from './features/inputPages/textPage/TextPage'
+import { LinkPage } from './features/inputPages/linkPage/LinkPage'
+import { FilePage } from './features/inputPages/filePage/FilePage'
 import { HistPage } from './features/hist/HistPage'
 
 export const routes = [

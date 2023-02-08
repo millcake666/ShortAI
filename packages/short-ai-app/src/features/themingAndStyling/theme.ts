@@ -203,6 +203,7 @@ export const themeOptions: ThemeOptions = {
         outlined: {
           backgroundColor: '#fff',
           border: '',
+          borderColor: '#000'
         },
         root: {
           padding: '8px 20px',
