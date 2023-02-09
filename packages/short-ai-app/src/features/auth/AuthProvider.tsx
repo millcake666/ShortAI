@@ -24,7 +24,7 @@ interface AuthContextType {
   }
   token: string | null
   isOnetimeAuth: boolean
-  signin: (userData: any, callback: VoidFunction) => void
+  signin: (userData: any, callback?: VoidFunction) => void
   signout: (callback?: VoidFunction) => void
 }
 
@@ -44,8 +44,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const user = typeof _user === 'string' && _user ? JSON.parse(_user) : _user
 
   const signin = (
-    newUser: { token: string; rememberMe: ConstrainBooleanParameters; user: any },
-    callback: VoidFunction
+    newUser: { token: string; rememberMe?: boolean; user: any },
+    callback?: VoidFunction
   ) => {
     if (newUser.rememberMe) {
       setToken(newUser.token)
