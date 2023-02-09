@@ -1,6 +1,7 @@
 export * from './bodyCreateFileTasksTaskIdUploadFilePost'
 export * from './bodyLoginForAccessTokenAuthTokenPost'
 export * from './bodyLoginForAccessTokenTokenPost'
+export * from './bodyUploadFileTasksTaskIdFilePost'
 export * from './bodyUploadFileTasksTaskIdUploadFilePost'
 export * from './defaultHttpException'
 export * from './exceptionContent'

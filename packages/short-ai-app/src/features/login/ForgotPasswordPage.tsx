@@ -41,7 +41,7 @@ export const ForgotPasswordPage = () => {
 
   return (
     <Form onSubmit={handleSubmit}>
-      {auth.token ? (
+      {auth.access_token ? (
         <Flex flexDirection="column">
           <Typography variant="h3">
             <b>Already logged in</b>

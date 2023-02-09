@@ -13,13 +13,12 @@ export const ErrorPage = (props: any) => {
   return (
     <Flex height="100vh" flexDirection="column" alignItems="center" justifyContent="center">
       <Typography variant="h3">
-        <b>Critical Error</b>
+        <b>Ошибка</b>
       </Typography>
       <Spacer />
-      <Typography>Sorry! App has crashed :(</Typography>
-      <Typography>We are working on a fix.</Typography>
+      <Typography>Мы уже работаем над исправлениями</Typography>
 
-      <Typography color="text">Error stack:</Typography>
+      <Typography color="text">Стек:</Typography>
       <Spacer />
 
       <Row>
@@ -36,7 +35,7 @@ export const ErrorPage = (props: any) => {
           props?.resetErrorBoundary()
         }}
       >
-        Refresh
+        Обновить
       </Button>
     </Flex>
   )

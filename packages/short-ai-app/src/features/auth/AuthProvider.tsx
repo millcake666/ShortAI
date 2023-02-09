@@ -1,3 +1,5 @@
+/* eslint-disable no-constant-condition */
+import FingerprintJS from '@fingerprintjs/fingerprintjs'
 import CloseIcon from '@mui/icons-material/CloseRounded'
 import { Typography } from '@mui/material'
 import axios from 'axios'
@@ -12,7 +14,21 @@ import { parseJwt } from '../../utils'
 import { useLocalStorage } from '../hooks/useLocalStorage'
 import { Absolute, Flex, Pointer, Spacer } from '../primitives'
 
-axios.defaults.baseURL = 'https://f6d9b9ea-1b47-4832-b0b6-8edf5257e9ce.mock.pstmn.io'
+const fpPromise = FingerprintJS.load({
+  monitoring: false
+})
+
+let fingerprint = ''
+
+;(async () => {
+  // Get the visitor identifier when you need it.
+  const fp = await fpPromise
+  const result = await fp.get()
+  // @ts-ignore
+  fingerprint = result.visitorId
+})()
+
+axios.defaults.baseURL = 'http://151.248.122.104:8000'
 
 interface AuthContextType {
   user: {
@@ -22,7 +38,7 @@ interface AuthContextType {
     factory_id: number
     email: string
   }
-  token: string | null
+  access_token: string | null
   isOnetimeAuth: boolean
   signin: (userData: any, callback?: VoidFunction) => void
   signout: (callback?: VoidFunction) => void
@@ -38,58 +54,39 @@ let resInterceptor: any = null
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   // @ts-ignore
   const [_user, setUser] = useLocalStorage('user', '')
-  const [token, setToken] = useLocalStorage('token', '')
+  const [access_token, setToken] = useLocalStorage('access_token', '')
+  const [refresh_token, setRefreshToken] = useLocalStorage('refresh_token', '')
+  const [fingerprintLS, setFingerprint] = useLocalStorage('fingerprint', fingerprint)
+
   const [isOnetimeAuth, setOnetimeAuth] = useState(false)
   const navigate = useNavigate()
   const user = typeof _user === 'string' && _user ? JSON.parse(_user) : _user
 
-  const signin = (
-    newUser: { token: string; rememberMe?: boolean; user: any },
-    callback?: VoidFunction
-  ) => {
-    if (newUser.rememberMe) {
-      setToken(newUser.token)
-    } else {
-      setOnetimeAuth(true)
-    }
-    setUser(typeof newUser.user === 'string' && _user ? JSON.stringify(newUser.user) : newUser.user)
-    callback?.()
-  }
-
   const signout = (callback?: VoidFunction) => {
     setUser(null)
     setToken('')
+    setRefreshToken('')
+    setFingerprint('')
     navigate(ROUTES.LOGIN)
     callback?.()
   }
 
   const interceptorsInit = () => {
     const requestHeaders = (config: any) => {
-      const lstoken = localStorage.getItem('token')?.replaceAll('"', '')
+      const fingerprintLS = localStorage.getItem('fingerprint')?.replaceAll('"', '')
 
-      if (
-        lstoken &&
-        config &&
-        !config?.url.includes(API.MUTATE.LOGIN) &&
-        !config?.url.includes(API.MUTATE.REGISTER)
-      ) {
-        config.headers.Authorization = `Bearer ${lstoken}`
+      if (fingerprintLS && config && !config?.url.includes('/token')) {
+        config.headers['temporary-id'] = `${fingerprintLS}`
       }
 
       return config
     }
 
     const responseHeaders = (config: any) => {
-      const newResponseToken = config?.headers?.AccessToken?.replace('Bearer ', '')
+      const fingerprintLS = localStorage.getItem('fingerprint')?.replaceAll('"', '')
 
-      if (
-        newResponseToken &&
-        config &&
-        !config?.url.includes(API.MUTATE.LOGIN) &&
-        !config?.url.includes(API.MUTATE.REGISTER)
-      ) {
-        localStorage.setItem('token', newResponseToken)
-        config.headers.AccessToken = `Bearer ${newResponseToken}`
+      if (fingerprintLS && config && !config?.url.includes('/token')) {
+        config.headers['temporary-id'] = `${fingerprintLS}`
       }
       return config
     }
@@ -153,13 +150,66 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   }
 
+  const signin = async ({ data, rememberMe, callback }: any) => {
+    const body = new URLSearchParams()
+    body.append('username', data.username)
+    body.append('password', data.password)
+
+    const result = await axios({
+      method: 'POST',
+      url: '/token',
+      headers: {
+        'finger-print': fingerprint,
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      data: body
+    })
+      .then((response) => {
+        if (true) {
+          setToken(response.data.access_token)
+          setRefreshToken(response.data.refresh_token)
+          setFingerprint(fingerprint)
+        } else {
+          setOnetimeAuth(true)
+        }
+        callback?.()
+      })
+      .catch((error: any) => {
+        //
+      })
+
+    return result
+  }
+
+  const refresh = async () => {
+    const result = await axios({
+      method: 'POST',
+      url: '/refresh',
+      headers: {
+        'finger-print': fingerprint,
+        refresh_token: refresh_token,
+        'Content-Type': 'application/json'
+      }
+    })
+      .then((response) => {
+        setToken(response.data.access_token)
+        setRefreshToken(response.data.refresh_token)
+        setFingerprint(fingerprint)
+      })
+      .catch((error: any) => {
+        //
+      })
+
+    return result
+  }
+
   useEffect(() => {
-    if (token && token !== 'null') {
-      const tokenData = jwtDecode(token)
+    if (access_token && access_token !== 'null') {
+      const tokenData = jwtDecode(access_token)
       const isExpired = Date.now() >= (tokenData?.payload?.exp || 1) * 1000
 
       if (isExpired) {
-        signout()
+        refresh()
       }
     }
 
@@ -178,7 +228,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   }, [])
 
-  const value = { user, signin, signout, token, isOnetimeAuth }
+  const value = { user, signin, signout, access_token, refresh_token, isOnetimeAuth }
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 }
@@ -191,7 +241,7 @@ export function RequireAuth({ children }: { children: JSX.Element }) {
   const auth = useAuth()
   const location = useLocation()
 
-  if (!auth.token && !auth.isOnetimeAuth) {
+  if (!auth.access_token && !auth.isOnetimeAuth) {
     return <Navigate to={ROUTES.LOGIN} state={{ from: location }} replace />
   }
 

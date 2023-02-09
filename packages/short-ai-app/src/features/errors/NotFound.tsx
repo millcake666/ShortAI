@@ -12,13 +12,13 @@ export const NotFound = () => {
   return (
     <Flex flexDirection="column" alignItems="center" justifyContent="center">
       <Typography variant="h3">
-        <b>Page not found</b>
+        <b>Страницы нет</b>
       </Typography>
       <Spacer space={60} />
       <NotFoundPic />
       <Spacer />
       <Button size="large" variant="contained" onClick={() => navigate(ROUTES.HOME)}>
-        Go home
+        На домашнюю
       </Button>
     </Flex>
   )

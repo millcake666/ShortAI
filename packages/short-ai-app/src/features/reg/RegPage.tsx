@@ -19,7 +19,7 @@ import { Controller, FieldValues, FormProvider, useForm } from 'react-hook-form'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 import { ROUTES } from '../../consts/routes'
-import { useCreateUserUsersPost } from '../api/generated/endpoints'
+import { useCreateUserUserPost } from '../api/generated/endpoints'
 import { UserCreate } from '../api/generated/models'
 import { useAuth } from '../auth/AuthProvider'
 import { Error, Flex, Spacer } from '../primitives'
@@ -31,14 +31,14 @@ export const RegPage = () => {
   const [formError, setFormError] = useState('')
 
   // reg mutation
-  const { mutate } = useCreateUserUsersPost({
+  const { mutate } = useCreateUserUserPost({
     mutation: {
       onSuccess: (res: any) => {
-        console.log('🐸 Pepe said => RegPage => res', res)
+        console.log('🐸 Pepe said => RegPage => res', res.data.access_token)
 
         signin(
           {
-            token: res.data.token,
+            access_token: res.data.access_token,
             user: {
               login: formValues.login,
               password: formValues.password,

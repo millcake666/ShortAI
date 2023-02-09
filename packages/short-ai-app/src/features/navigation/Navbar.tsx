@@ -40,7 +40,7 @@ export const Navbar = () => {
         <Flex as="button" onClick={() => navigate(ROUTES.HOME)} alignItems={'center'}>
           <Logo />
         </Flex>
-        {auth.token ? (
+        {auth.access_token ? (
           <AvatarMenu />
         ) : (
           <Button

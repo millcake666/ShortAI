@@ -20,6 +20,13 @@ import { ScrollToTop } from './features/navigation/ScrollToTop'
 import BrandingProvider from './features/themingAndStyling/BrandingProvider'
 import { routes } from './routes'
 
+const element = document.getElementById('root')
+
+// Tell React to take control of that element
+// In TypeScript, since there is a bug, you need to add the "!" element!
+// https://github.com/DefinitelyTyped/DefinitelyTyped/issues/43848
+const root = ReactDOM.createRoot(element!)
+
 setConfiguration({
   gutterWidth: 20,
   breakpoints: BREAKPOINTS,
@@ -88,4 +95,4 @@ export const App = () => {
   )
 }
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(<App />)
+root.render(<App />)

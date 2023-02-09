@@ -5,8 +5,6 @@
  * OpenAPI spec version: 0.1.0
  */
 
-export interface Token {
-  refresh_token: string
-  access_token: string
-  token_type: string
+export interface BodyUploadFileTasksTaskIdFilePost {
+  file: Blob
 }

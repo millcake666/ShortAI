@@ -32,3 +32,6 @@ prettier
 
 доступ к скриптам внутри пакетов осуществлен через конcтрукцию: `yarn workspace @monorepo-name/package-name script_alias`
 например: `yarn workspace @short-ai/short-ai-app start` - скрипт `start` находится по пути `./packages/short-ai-app/package.json`
+
+OPEN API
+http://151.248.122.104:8000/redoc
