@@ -74,20 +74,30 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const interceptorsInit = () => {
     const requestHeaders = (config: any) => {
-      const fingerprintLS = localStorage.getItem('fingerprint')?.replaceAll('"', '')
+      const access_token = localStorage.getItem('access_token')?.replaceAll('"', '')
 
-      if (fingerprintLS && config && !config?.url.includes('/token')) {
-        config.headers['temporary-id'] = `${temporaryId}`
+      if (
+        access_token &&
+        config &&
+        !('' + config?.url)?.includes('/token') &&
+        !(('' + config?.url)?.includes('/user') && config?.method === 'post')
+      ) {
+        config.headers['Authorization'] = `${access_token}`
       }
 
       return config
     }
 
     const responseHeaders = (config: any) => {
-      const fingerprintLS = localStorage.getItem('fingerprint')?.replaceAll('"', '')
+      const access_token = localStorage.getItem('access_token')?.replaceAll('"', '')
 
-      if (fingerprintLS && config && !config?.url.includes('/token')) {
-        config.headers['temporary-id'] = `${temporaryId}`
+      if (
+        access_token &&
+        config &&
+        !('' + config?.url)?.includes('/token') &&
+        !config?.url?.includes('/user')
+      ) {
+        config.headers['Authorization'] = `${access_token}`
       }
       return config
     }

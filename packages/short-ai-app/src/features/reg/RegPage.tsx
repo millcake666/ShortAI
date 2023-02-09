@@ -34,19 +34,15 @@ export const RegPage = () => {
   const { mutate } = useCreateUserUserPost({
     mutation: {
       onSuccess: (res: any) => {
-        console.log('🐸 Pepe said => RegPage => res', res.data.access_token)
-
-        signin(
-          {
-            access_token: res.data.access_token,
-            user: {
-              login: formValues.login,
-              password: formValues.password,
-              email: formValues.email
-            }
+        signin({
+          access_token: res.data.access_token,
+          data: {
+            username: formValues.login,
+            password: formValues.password,
+            email: formValues.email
           },
-          () => navigate(ROUTES.HOME)
-        )
+          callback: () => navigate(ROUTES.HOME)
+        })
       },
       onError: (error) => {
         const errorMgs = JSON.parse(error.request.responseText)
@@ -86,7 +82,7 @@ export const RegPage = () => {
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Spacer />
         <Typography variant="h2" textAlign="center">
-          <b>Hi there! Let&apos;s register!</b>
+          <b>Регистрация</b>
         </Typography>
         <Spacer />
 
@@ -94,12 +90,12 @@ export const RegPage = () => {
           <Col lg={12}>
             <TextField
               {...register('login', { required: 'Fill out name' })}
-              label="login"
+              label="Логин"
               variant="outlined"
               fullWidth
-              error={!!errors.name}
+              error={!!errors.login}
             />
-            <Error name="name" />
+            <Error name="login" />
           </Col>
         </Row>
 

@@ -25,13 +25,13 @@ export const routes = [
   {
     element: <HomePage />,
     path: ROUTES.HOME,
-    privatePage: true,
+    privatePage: false,
     featureActive: true
   },
   {
     element: <HomePage />,
     path: ROUTES.ROOT,
-    privatePage: true,
+    privatePage: false,
     featureActive: true
   },
   {
@@ -43,19 +43,19 @@ export const routes = [
   {
     element: <TextPage />,
     path: ROUTES.TEXT,
-    privatePage: true,
+    privatePage: false,
     featureActive: true
   },
   {
     element: <LinkPage />,
     path: ROUTES.LINK,
-    privatePage: true,
+    privatePage: false,
     featureActive: true
   },
   {
     element: <FilePage />,
     path: ROUTES.FILE,
-    privatePage: true,
+    privatePage: false,
     featureActive: true
   },
   {
