@@ -12,7 +12,7 @@ import { parseJwt } from '../../utils'
 import { useLocalStorage } from '../hooks/useLocalStorage'
 import { Absolute, Flex, Pointer, Spacer } from '../primitives'
 
-axios.defaults.baseURL = 'https://heqs-services-dev.onrender.com/api/'
+axios.defaults.baseURL = 'https://f6d9b9ea-1b47-4832-b0b6-8edf5257e9ce.mock.pstmn.io'
 
 interface AuthContextType {
   user: {
@@ -24,7 +24,7 @@ interface AuthContextType {
   }
   token: string | null
   isOnetimeAuth: boolean
-  signin: (userData: any, callback: VoidFunction) => void
+  signin: (userData: any, callback?: VoidFunction) => void
   signout: (callback?: VoidFunction) => void
 }
 
@@ -44,8 +44,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const user = typeof _user === 'string' && _user ? JSON.parse(_user) : _user
 
   const signin = (
-    newUser: { token: string; rememberMe: ConstrainBooleanParameters; user: any },
-    callback: VoidFunction
+    newUser: { token: string; rememberMe?: boolean; user: any },
+    callback?: VoidFunction
   ) => {
     if (newUser.rememberMe) {
       setToken(newUser.token)

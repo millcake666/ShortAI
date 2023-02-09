@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable no-extra-boolean-cast */
 import styled from '@emotion/styled'
 import {
@@ -57,6 +59,7 @@ export const Navbar = () => {
 
 const AvatarMenu = () => {
   const navigate = useNavigate()
+  const { signout } = useAuth()
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
   const open = Boolean(anchorEl)
@@ -129,9 +132,11 @@ const AvatarMenu = () => {
           <ListItemIcon>
             <LogoutIcon />
           </ListItemIcon>
-          <Typography variant={'body1'} color={grey[600]}>
-            Выход
-          </Typography>
+          <button onClick={() => signout()}>
+            <Typography variant={'body1'} color={grey[600]}>
+              Выход
+            </Typography>
+          </button>
         </MenuItem>
       </Menu>
     </div>

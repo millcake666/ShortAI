@@ -19,27 +19,44 @@ import { Controller, FieldValues, FormProvider, useForm } from 'react-hook-form'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 import { ROUTES } from '../../consts/routes'
+import { useCreateUserUsersPost } from '../api/generated/endpoints'
+import { UserCreate } from '../api/generated/models'
 import { useAuth } from '../auth/AuthProvider'
 import { Error, Flex, Spacer } from '../primitives'
 
 export const RegPage = () => {
   const navigate = useNavigate()
   const location = useLocation()
+  const { signin } = useAuth()
   const [formError, setFormError] = useState('')
-  // const { mutate } = useRegister({
-  //   mutation: {
-  //     onSuccess: () => {
-  //       navigate(ROUTES.HOME)
-  //     },
-  //     onError: (error) => {
-  //       const errorMgs = JSON.parse(error.request.responseText)
-  //       // @ts-ignore
-  //       setFormError(errorMgs?.errors[0] || '')
-  //     }
-  //   }
-  // })
+
+  // reg mutation
+  const { mutate } = useCreateUserUsersPost({
+    mutation: {
+      onSuccess: (res: any) => {
+        console.log('🐸 Pepe said => RegPage => res', res)
+
+        signin(
+          {
+            token: res.data.token,
+            user: {
+              login: formValues.login,
+              password: formValues.password,
+              email: formValues.email
+            }
+          },
+          () => navigate(ROUTES.HOME)
+        )
+      },
+      onError: (error) => {
+        const errorMgs = JSON.parse(error.request.responseText)
+        // @ts-ignore
+        setFormError(errorMgs?.errors[0] || '')
+      }
+    }
+  })
   const methods = useForm()
-  const { handleSubmit, control, formState, getValues, register, watch, trigger } = methods
+  const { handleSubmit, formState, getValues, register, watch, trigger } = methods
 
   const fromPage = location.state?.from?.pathname || '/'
   const errors = formState.errors
@@ -47,9 +64,8 @@ export const RegPage = () => {
   const password = watch('password')
   const password_confirmation = watch('password_confirmation')
 
-  const onSubmit = (data: FieldValues) => {
-    // const _data: RegisterBody = data
-    // mutate({ data: _data })
+  const onSubmit = (data: any) => {
+    mutate({ data: { login: data.login, password: data.password, email: data.email } })
     return console.log(data)
   }
 
@@ -75,26 +91,15 @@ export const RegPage = () => {
         <Spacer />
 
         <Row>
-          <Col lg={6}>
+          <Col lg={12}>
             <TextField
-              {...register('name', { required: 'Fill out name' })}
-              label="Name"
+              {...register('login', { required: 'Fill out name' })}
+              label="login"
               variant="outlined"
               fullWidth
               error={!!errors.name}
             />
             <Error name="name" />
-          </Col>
-          <Col lg={6}>
-            <TextField
-              {...register('surname', { required: 'Fill out surname' })}
-              label="Surname"
-              variant="outlined"
-              fullWidth
-              autoComplete="surname"
-              error={!!errors?.surname}
-            />
-            <Error name="surname" />
           </Col>
         </Row>
 
@@ -141,48 +146,6 @@ export const RegPage = () => {
               fullWidth
             />
             <Error name="password_confirmation" />
-          </Col>
-        </Row>
-
-        <Row>
-          <Col md={6}>
-            <Controller
-              control={control}
-              name="user_position_id"
-              rules={{ required: 'Fill out user position' }}
-              render={({ field: { onChange, value, name } }) => {
-                return (
-                  <FormControl fullWidth>
-                    <InputLabel id="user_position_id-label">User Position</InputLabel>
-                  </FormControl>
-                )
-              }}
-            />
-            <Error name="user_position_id" />
-          </Col>
-          <Col md={6}>
-            <Controller
-              control={control}
-              name="factory_id"
-              rules={{ required: 'Fill out factory' }}
-              render={({ field: { onChange, value, name } }) => {
-                return (
-                  <FormControl fullWidth>
-                    <InputLabel id="Factory-label">Factory</InputLabel>
-                    <Select
-                      value={value || ''}
-                      onChange={onChange}
-                      labelId="Factory-label"
-                      label="Factory"
-                      error={!!errors[name]}
-                    >
-                      <MenuItem>heheh</MenuItem>
-                    </Select>
-                  </FormControl>
-                )
-              }}
-            />
-            <Error name="factory_id" />
           </Col>
         </Row>
 

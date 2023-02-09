@@ -24,7 +24,7 @@ export const routes = [
   {
     element: <HomePage />,
     path: ROUTES.HOME,
-    privatePage: false,
+    privatePage: true,
     featureActive: true
   },
   {
@@ -36,25 +36,25 @@ export const routes = [
   {
     element: <HistPage />,
     path: ROUTES.HIST,
-    privatePage: false,
+    privatePage: true,
     featureActive: true
   },
   {
     element: <TextPage />,
     path: ROUTES.TEXT,
-    privatePage: false,
+    privatePage: true,
     featureActive: true
   },
   {
     element: <LinkPage />,
     path: ROUTES.LINK,
-    privatePage: false,
+    privatePage: true,
     featureActive: true
   },
   {
     element: <FilePage />,
     path: ROUTES.FILE,
-    privatePage: false,
+    privatePage: true,
     featureActive: true
   }
 ]
