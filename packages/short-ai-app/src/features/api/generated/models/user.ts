@@ -5,4 +5,8 @@
  * OpenAPI spec version: 0.1.0
  */
 
-export type ValidationErrorLocItem = string | number
+export interface User {
+  login?: string
+  email?: string
+  password?: string
+}

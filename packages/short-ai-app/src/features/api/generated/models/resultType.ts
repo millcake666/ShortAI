@@ -8,11 +8,10 @@
 /**
  * An enumeration.
  */
-export type TaskType = (typeof TaskType)[keyof typeof TaskType]
+export type ResultType = (typeof ResultType)[keyof typeof ResultType]
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
-export const TaskType = {
+export const ResultType = {
   file: 'file',
-  text: 'text',
-  url: 'url'
+  text: 'text'
 } as const
