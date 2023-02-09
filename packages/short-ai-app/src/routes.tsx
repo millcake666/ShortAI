@@ -7,6 +7,7 @@ import { TextPage } from './features/inputPages/textPage/TextPage'
 import { ForgotPasswordPage } from './features/login/ForgotPasswordPage'
 import { LoginPage } from './features/login/LoginPage'
 import { RegPage } from './features/reg/RegPage'
+import { ResultPage } from './features/resultPages/ResultPage'
 
 export const routes = [
   {
@@ -54,6 +55,12 @@ export const routes = [
   {
     element: <FilePage />,
     path: ROUTES.FILE,
+    privatePage: false,
+    featureActive: true
+  },
+  {
+    element: <ResultPage />,
+    path: ROUTES.RESULT,
     privatePage: false,
     featureActive: true
   }

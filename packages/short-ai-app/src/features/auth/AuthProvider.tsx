@@ -12,7 +12,7 @@ import { parseJwt } from '../../utils'
 import { useLocalStorage } from '../hooks/useLocalStorage'
 import { Absolute, Flex, Pointer, Spacer } from '../primitives'
 
-axios.defaults.baseURL = 'https://heqs-services-dev.onrender.com/api/'
+axios.defaults.baseURL = 'https://4772667e-f9bd-420a-b35b-b1128a5c5e1b.mock.pstmn.io'
 
 interface AuthContextType {
   user: {

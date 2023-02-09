@@ -9,22 +9,8 @@ import { InputBar } from '../inputBar/InputBar'
 export const LinkPage = () => {
   return (
     <div>
-      {InputBar('link')}
+      <InputBar page="url" />
       <Spacer space={20} />
-      <TextField
-        fullWidth
-        multiline
-        rows={2}
-        defaultValue=""
-        placeholder="Вставьте сюда ссылку"
-        InputProps={{
-          startAdornment: (
-            <InputAdornment position={'start'}>
-              <LinkMicroIcon />
-            </InputAdornment>
-          )
-        }}
-      />
     </div>
   )
 }

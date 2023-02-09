@@ -1,24 +1,15 @@
 import React from 'react'
-import {Button, TextField, Typography} from "@mui/material";
-import styled from "@emotion/styled";
+import { Button, TextField, Typography } from '@mui/material'
+import styled from '@emotion/styled'
 import { Flex, Pad, Spacer } from '../../primitives'
-import {InputBar} from "../inputBar/InputBar";
-
+import { InputBar } from '../inputBar/InputBar'
+import { useCreateTaskTasksPost } from '../../api/generated/endpoints'
 
 export const TextPage = () => {
-
-
-    return (
-        <div>
-            {InputBar('text')}
-            <Spacer space={40} />
-            <TextField
-                fullWidth
-                multiline
-                rows={10}
-                defaultValue=""
-                placeholder="Начните вводить текст"
-            />
-        </div>
-    )
+  return (
+    <div>
+      <InputBar page="text" />
+      <Spacer space={40} />
+    </div>
+  )
 }

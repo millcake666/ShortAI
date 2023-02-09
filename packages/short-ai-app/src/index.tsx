@@ -1,4 +1,4 @@
-import '@short-ai/sfprorounded-typeface/index.css'
+import '/Users/user/WebstormProjects/ShortAI/packages/sfprorounded-typeface/index.css'
 import './features/themingAndStyling/index.css'
 
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
