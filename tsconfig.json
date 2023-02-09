@@ -25,6 +25,8 @@
   "include": [
     "packages/short-ai-app/**/*.ts",
     "packages/short-ai-app/**/*.tsx",
+    "packages/sfprorounded-typeface/**/*.ts",
+    "packages/sfprorounded-typeface/**/*.tsx",
     "packages/examples-app/**/*.ts",
     "packages/examples-app/**/*.tsx"
   ]

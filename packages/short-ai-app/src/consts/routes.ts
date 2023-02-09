@@ -6,5 +6,6 @@ export const ROUTES = {
   HIST: '/history',
   TEXT: '/text',
   LINK: '/link',
-  FILE: '/file'
+  FILE: '/file',
+  RESULT: '/result'
 }

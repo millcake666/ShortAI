@@ -19,6 +19,7 @@ const fpPromise = FingerprintJS.load({
 })
 
 let fingerprint = ''
+const temporaryId = Math.floor(Math.random() * 100000)
 
 ;(async () => {
   // Get the visitor identifier when you need it.
@@ -76,7 +77,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       const fingerprintLS = localStorage.getItem('fingerprint')?.replaceAll('"', '')
 
       if (fingerprintLS && config && !config?.url.includes('/token')) {
-        config.headers['temporary-id'] = `${fingerprintLS}`
+        config.headers['temporary-id'] = `${temporaryId}`
       }
 
       return config
@@ -86,7 +87,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       const fingerprintLS = localStorage.getItem('fingerprint')?.replaceAll('"', '')
 
       if (fingerprintLS && config && !config?.url.includes('/token')) {
-        config.headers['temporary-id'] = `${fingerprintLS}`
+        config.headers['temporary-id'] = `${temporaryId}`
       }
       return config
     }
