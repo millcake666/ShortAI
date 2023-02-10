@@ -12,8 +12,8 @@ export const SadIcon = () => {
           d="M43 74.375C60.6041 74.375 74.875 60.1041 74.875 42.5C74.875 24.8959 60.6041 10.625 43 10.625C25.3959 10.625 11.125 24.8959 11.125 42.5C11.125 60.1041 25.3959 74.375 43 74.375Z"
           fill="url(#paint0_linear_642_21157)"
           stroke="url(#paint1_linear_642_21157)"
-          stroke-width="3"
-          stroke-miterlimit="10"
+          strokeWidth="3"
+          strokeMiterlimit="10"
         />
         <path
           d="M31.0469 39.8438C33.2474 39.8438 35.0312 38.0599 35.0312 35.8594C35.0312 33.6589 33.2474 31.875 31.0469 31.875C28.8464 31.875 27.0625 33.6589 27.0625 35.8594C27.0625 38.0599 28.8464 39.8438 31.0469 39.8438Z"
@@ -34,9 +34,9 @@ export const SadIcon = () => {
         <path
           d="M56.8125 58.4377C55.4083 56.0185 53.3934 54.0106 50.9693 52.6148C48.5453 51.219 45.7972 50.4844 43 50.4844C40.2028 50.4844 37.4547 51.219 35.0307 52.6148C32.6066 54.0106 30.5917 56.0185 29.1875 58.4377"
           stroke="white"
-          stroke-width="3"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="3"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
         <defs>
           <linearGradient
@@ -47,8 +47,8 @@ export const SadIcon = () => {
             y2="74.375"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stop-color="#D7D7D7" />
-            <stop offset="0.854167" stop-color="#AFAFAF" />
+            <stop stopColor="#D7D7D7" />
+            <stop offset="0.854167" stopColor="#AFAFAF" />
           </linearGradient>
           <linearGradient
             id="paint1_linear_642_21157"
@@ -58,8 +58,8 @@ export const SadIcon = () => {
             y2="74.375"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stop-color="#D7D7D7" />
-            <stop offset="0.854167" stop-color="#AFAFAF" />
+            <stop stopColor="#D7D7D7" />
+            <stop offset="0.854167" stopColor="#AFAFAF" />
           </linearGradient>
         </defs>
       </svg>
