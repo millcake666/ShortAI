@@ -36,6 +36,7 @@ interface AuthContextType {
   isOnetimeAuth: boolean
   signin: (userData: any, callback?: VoidFunction) => void
   signout: (callback?: VoidFunction) => void
+  authError: string
 }
 
 const AuthContext = React.createContext<AuthContextType>(null!)
@@ -52,6 +53,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [refresh_token, setRefreshToken] = useLocalStorage('refresh_token', '')
   const [fingerprintLS, setFingerprint] = useLocalStorage('fingerprint', fingerprint)
   const [temporary_idLS, setTemporaryIdLS] = useLocalStorage('temporary_id', '')
+  const [authError, setAuthError] = useState('')
 
   const [isOnetimeAuth, setOnetimeAuth] = useState(false)
   const navigate = useNavigate()
@@ -61,7 +63,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setUser(null)
     setToken('')
     setRefreshToken('')
-    setFingerprint('')
+    // setFingerprint('')
     navigate(ROUTES.LOGIN)
     callback?.()
   }
@@ -95,7 +97,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         access_token &&
         config &&
         !('' + config?.url)?.includes('/token') &&
-        !config?.url?.includes('/user')
+        !(('' + config?.url)?.includes('/user') && config?.method === 'post')
       ) {
         config.headers['Authorization'] = `${access_token}`
       }
@@ -189,10 +191,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         } else {
           setOnetimeAuth(true)
         }
+        setAuthError('')
         callback?.()
       })
       .catch((error: any) => {
-        //
+        setAuthError('error')
       })
 
     return result
@@ -204,7 +207,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       url: '/refresh',
       headers: {
         'finger-print': fingerprint,
-        refresh_token: refresh_token,
+        'refresh-token': refresh_token,
         'Content-Type': 'application/json'
       }
     })
@@ -213,9 +216,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         setRefreshToken(response.data.refresh_token)
         setFingerprint(fingerprint)
         setTemporaryIdLS('')
+        setAuthError('')
       })
       .catch((error: any) => {
-        //
+        setAuthError('error')
       })
 
     return result
@@ -249,7 +253,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   }, [])
 
-  const value = { user, signin, signout, access_token, refresh_token, isOnetimeAuth }
+  const value = { user, signin, signout, access_token, refresh_token, isOnetimeAuth, authError }
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 }

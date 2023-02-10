@@ -1,22 +1,12 @@
 /* eslint-disable no-constant-condition */
 /* eslint-disable max-len */
 import styled from '@emotion/styled'
-import {
-  Alert,
-  Button,
-  Checkbox,
-  CircularProgress,
-  FormControlLabel,
-  Paper,
-  TextField,
-  Typography
-} from '@mui/material'
+import { Alert, Button, Checkbox, CircularProgress, TextField, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { Controller, FieldValues, useForm } from 'react-hook-form'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 import { ROUTES } from '../../consts/routes'
-import { useLoginForAccessTokenTokenPost } from '../api/generated/endpoints'
 import { useAuth } from '../auth/AuthProvider'
 import { Flex, Spacer } from '../primitives'
 
@@ -26,9 +16,7 @@ export const LoginPage = () => {
   const auth = useAuth()
 
   const methods = useForm({ reValidateMode: 'onSubmit' })
-  const { handleSubmit, setError, formState, getValues, register, control, clearErrors, trigger } =
-    methods
-  const formValues = getValues()
+  const { handleSubmit, formState, getValues, register, clearErrors } = methods
   const errors = formState.errors
 
   const from = location.state?.from?.pathname || '/'
@@ -91,22 +79,8 @@ export const LoginPage = () => {
             fullWidth
             error={!!errors.username}
           />
-          <Spacer space={4} />
-          <Flex alignItems="center" justifyContent="space-between" width="100%">
-            <Controller
-              control={control}
-              name="rememberMe"
-              defaultValue={true}
-              render={({ field: { onChange, onBlur, value } }) => (
-                <FormControlLabel
-                  label="Запомнить вход"
-                  control={<Checkbox onBlur={onBlur} checked={value} onChange={onChange} />}
-                />
-              )}
-            />
-          </Flex>
 
-          <Spacer space={20} />
+          <Spacer space={30} />
           {false ? (
             <CircularProgress />
           ) : (
@@ -131,7 +105,7 @@ export const LoginPage = () => {
               </Button>
               <Spacer />
               <Flex>
-                {(errors.username || errors.password || errors.network) && (
+                {(errors.username || errors.password || auth.authError) && (
                   <Alert variant="filled" severity="error">
                     <div>
                       {errors?.network?.message?.toString() || 'Неправильный логин или пароль'}

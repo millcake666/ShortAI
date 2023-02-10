@@ -20,13 +20,6 @@ import { ScrollToTop } from './features/navigation/ScrollToTop'
 import BrandingProvider from './features/themingAndStyling/BrandingProvider'
 import { routes } from './routes'
 
-const element = document.getElementById('root')
-
-// Tell React to take control of that element
-// In TypeScript, since there is a bug, you need to add the "!" element!
-// https://github.com/DefinitelyTyped/DefinitelyTyped/issues/43848
-const root = ReactDOM.createRoot(element!)
-
 setConfiguration({
   gutterWidth: 20,
   breakpoints: BREAKPOINTS,
@@ -51,7 +44,6 @@ export const App = () => {
             // reset the state of your app so the error doesn't happen again
           }}
         >
-          <ScrollToTop />
           <QueryClientProvider client={queryClient}>
             <AuthProvider>
               <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -94,5 +86,12 @@ export const App = () => {
     </BrandingProvider>
   )
 }
+
+const element = document.getElementById('root')
+
+// Tell React to take control of that element
+// In TypeScript, since there is a bug, you need to add the "!" element!
+// https://github.com/DefinitelyTyped/DefinitelyTyped/issues/43848
+const root = ReactDOM.createRoot(element!)
 
 root.render(<App />)
