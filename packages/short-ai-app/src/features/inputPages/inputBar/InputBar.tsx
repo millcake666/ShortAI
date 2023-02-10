@@ -9,7 +9,7 @@ import {
   Typography
 } from '@mui/material'
 import { grey } from '@mui/material/colors'
-import React, { createRef, useState } from 'react'
+import React, { createRef, useEffect, useState } from 'react'
 import Dropzone from 'react-dropzone'
 import { Col, Row } from 'react-grid-system'
 import { useNavigate } from 'react-router-dom'
@@ -26,6 +26,7 @@ import {
   TaskIn,
   TaskType
 } from '../../api/generated/models'
+import { useLocalStorage } from '../../hooks/useLocalStorage'
 import { BookmarkIcon } from '../../navigation/BookmarkIcon'
 import { Flex, Spacer } from '../../primitives'
 import { blue } from '../../themingAndStyling/theme'
@@ -51,21 +52,10 @@ const optionMap: { [key: string]: number } = {
   file: 2
 }
 
-// upload file post acceptedFiles
-function FileUploaderReq(id_task: number, file: Blob) {
-  console.log('1')
-  const { mutate, data } = useUploadFileTasksTaskIdFilePost()
-
-  console.log('2')
-  const task: BodyUploadFileTasksTaskIdUploadFilePost = {
-    file: file
-  }
-  mutate({ taskId: id_task, data: task })
-}
-
 export const InputBar: RFCC<{ page: TaskType }> = ({ page }) => {
   const navigate = useNavigate()
   const [uploadFile, setUploadFile] = useState(null)
+  const [temporary_idLS, setTemporaryIdLS] = useLocalStorage('temporary_id', '')
 
   // хендлер изменения поля ввода текста
   const [valueText, setValueText] = useState('')
@@ -81,8 +71,23 @@ export const InputBar: RFCC<{ page: TaskType }> = ({ page }) => {
     // console.log(event.target.value)
   }
 
+  //upload logic
+  const { mutate: uploadMutation } = useUploadFileTasksTaskIdFilePost()
+
   // create task post
-  const { mutate, data } = useCreateTaskTasksPost()
+  const { mutate: taskCreateMutation, data } = useCreateTaskTasksPost({
+    mutation: {
+      onSuccess: ({ data: _data }) => {
+        if (page == 'file' && _data && uploadFile != null) {
+          const taskId: number = _data.id as any
+
+          uploadMutation({ taskId, data: { file: uploadFile } })
+
+          console.log('tyt')
+        }
+      }
+    }
+  })
   const handlerCreateTask = (file: Blob | null) => {
     const task: TaskIn = {
       type: page,
@@ -98,14 +103,9 @@ export const InputBar: RFCC<{ page: TaskType }> = ({ page }) => {
         break
       }
     }
-    mutate({ data: task })
+    taskCreateMutation({ data: task })
     console.log(data)
     console.log(file)
-
-    if (page == 'file' && data && file != null) {
-      FileUploaderReq(data.data.id, file)
-      console.log('tyt')
-    }
   }
 
   // меню выбора вкладки инпута
@@ -143,6 +143,12 @@ export const InputBar: RFCC<{ page: TaskType }> = ({ page }) => {
       dropzoneRef.current.open()
     }
   }
+
+  useEffect(() => {
+    if (data?.data.temporary_id) {
+      setTemporaryIdLS(data?.data.temporary_id)
+    }
+  }, [data])
 
   return (
     <div>
@@ -286,7 +292,7 @@ export const InputBar: RFCC<{ page: TaskType }> = ({ page }) => {
               <div className="container">
                 <DropZoneWrap {...getRootProps({ className: 'dropzone' })}>
                   <input {...getInputProps()} />
-                  {selectFile(acceptedFiles[0], setUploadFile)}
+                  <FileSelector file={acceptedFiles[0]} setUploadFile={setUploadFile} />
                   <Button size={'small'} variant={'outlined'} onClick={openDialog}>
                     <Typography variant={'body1'}>Выберите его</Typography>
                   </Button>
@@ -300,9 +306,14 @@ export const InputBar: RFCC<{ page: TaskType }> = ({ page }) => {
   )
 }
 
-function selectFile(file: Blob, state: any) {
+const FileSelector: RFCC<{ file: Blob; setUploadFile: any }> = ({ file, setUploadFile }) => {
+  useEffect(() => {
+    if (file) {
+      setUploadFile(file || null)
+    }
+  }, [file])
+
   if (file) {
-    state(file)
     return (
       <Flex flexDirection={'column'} alignItems={'center'}>
         <UploadIcon />
@@ -313,7 +324,6 @@ function selectFile(file: Blob, state: any) {
       </Flex>
     )
   } else {
-    state(null)
     return (
       <Flex flexDirection={'column'} alignItems={'center'}>
         <UploadIconDisable />
