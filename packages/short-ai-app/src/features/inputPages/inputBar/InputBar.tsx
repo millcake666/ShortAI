@@ -36,12 +36,12 @@ import { FileIconSmall } from '../icon/FileIconSmall'
 import { LinkIcon } from '../icon/LinkIcon'
 import { LinkIconSmall } from '../icon/LinkIconSmall'
 import { LinkMicroIcon } from '../icon/LinkMicroIcon'
+import { SadIcon } from '../icon/SadIcon'
 import { TextIcon } from '../icon/TextIcon'
 import { TextIconSmall } from '../icon/TextIconSmall'
 import { TickIcon } from '../icon/TickIcon'
 import { UploadIcon } from '../icon/UploadIcon'
 import { UploadIconDisable } from '../icon/UploadIconDisable'
-import { SadIcon } from '../icon/SadIcon'
 
 const options = ['Текст', 'Ссылка', 'Документ']
 

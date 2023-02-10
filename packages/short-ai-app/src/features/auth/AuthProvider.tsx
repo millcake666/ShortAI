@@ -86,6 +86,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         config.headers['temporary-id'] = `${temporaryId}`
       }
 
+      config.headers['finger-print'] = `${fingerprint}`
+
       return config
     }
 
@@ -105,6 +107,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       if (!access_token && temporaryId && temporaryId !== 'undefined') {
         config.headers['temporary-id'] = `${temporaryId}`
       }
+
+      config.headers['finger-print'] = `${fingerprint}`
 
       return config
     }
