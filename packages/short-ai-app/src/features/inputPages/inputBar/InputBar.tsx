@@ -41,6 +41,7 @@ import { TextIconSmall } from '../icon/TextIconSmall'
 import { TickIcon } from '../icon/TickIcon'
 import { UploadIcon } from '../icon/UploadIcon'
 import { UploadIconDisable } from '../icon/UploadIconDisable'
+import { SadIcon } from '../icon/SadIcon'
 
 const options = ['Текст', 'Ссылка', 'Документ']
 
@@ -293,9 +294,9 @@ export const InputBar: RFCC<{ page: TaskType }> = ({ page }) => {
                 <DropZoneWrap {...getRootProps({ className: 'dropzone' })}>
                   <input {...getInputProps()} />
                   <FileSelector file={acceptedFiles[0]} setUploadFile={setUploadFile} />
-                  <Button size={'small'} variant={'outlined'} onClick={openDialog}>
-                    <Typography variant={'body1'}>Выберите его</Typography>
-                  </Button>
+                  {/*<Button size={'small'} variant={'outlined'} onClick={openDialog}>*/}
+                  {/*  <Typography variant={'body1'}>Выберите его</Typography>*/}
+                  {/*</Button>*/}
                 </DropZoneWrap>
               </div>
             )
@@ -307,29 +308,34 @@ export const InputBar: RFCC<{ page: TaskType }> = ({ page }) => {
 }
 
 const FileSelector: RFCC<{ file: Blob; setUploadFile: any }> = ({ file, setUploadFile }) => {
-  useEffect(() => {
-    if (file) {
-      setUploadFile(file || null)
-    }
-  }, [file])
+  // useEffect(() => {
+  //   if (file) {
+  //     setUploadFile(file || null)
+  //   }
+  // }, [file])
 
   if (file) {
     return (
       <Flex flexDirection={'column'} alignItems={'center'}>
-        <UploadIcon />
+        {/*<UploadIcon />*/}
+        <SadIcon />
         <Spacer space={20} />
-        <Typography variant={'h4'} textAlign={'center'}>
-          {file.name}
+        {/*<Typography variant={'h4'} textAlign={'center'}>*/}
+        {/*  {file.name}*/}
+        {/*</Typography>*/}
+        <Typography variant={'h2'} color={grey[400]} textAlign={'center'}>
+          Извините, функция временно недоступна
         </Typography>
       </Flex>
     )
   } else {
     return (
       <Flex flexDirection={'column'} alignItems={'center'}>
-        <UploadIconDisable />
+        {/*<UploadIconDisable />*/}
+        <SadIcon />
         <Spacer space={20} />
         <Typography variant={'h2'} color={grey[400]} textAlign={'center'}>
-          Перетащите файл сюда или
+          Извините, функция временно недоступна
         </Typography>
       </Flex>
     )
