@@ -1,18 +1,25 @@
 /* eslint-disable no-constant-condition */
 import FingerprintJS from '@fingerprintjs/fingerprintjs'
+import CloseIcon from '@mui/icons-material/CloseRounded'
+import { Typography } from '@mui/material'
 import axios from 'axios'
-import { jwtDecode } from 'jwt-js-decode'
+import { jwtDecode, jwtVerify, resignJwt } from 'jwt-js-decode'
 import React, { useEffect, useState } from 'react'
+import { toast } from 'react-hot-toast'
 import { Navigate, useLocation, useNavigate } from 'react-router-dom'
 
+import { API } from '../../consts/api'
 import { ROUTES } from '../../consts/routes'
+import { parseJwt } from '../../utils'
 import { useLocalStorage } from '../hooks/useLocalStorage'
+import { Absolute, Flex, Pointer, Spacer } from '../primitives'
 
 const fpPromise = FingerprintJS.load({
   monitoring: false
 })
 
 let fingerprint = ''
+const temporaryId = Math.floor(Math.random() * 100000)
 
 ;(async () => {
   // Get the visitor identifier when you need it.
@@ -51,7 +58,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [access_token, setToken] = useLocalStorage('access_token', '')
   const [refresh_token, setRefreshToken] = useLocalStorage('refresh_token', '')
   const [fingerprintLS, setFingerprint] = useLocalStorage('fingerprint', fingerprint)
-  const [temporary_idLS, setTemporaryIdLS] = useLocalStorage('temporary_id', '')
 
   const [isOnetimeAuth, setOnetimeAuth] = useState(false)
   const navigate = useNavigate()
@@ -69,7 +75,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const interceptorsInit = () => {
     const requestHeaders = (config: any) => {
       const access_token = localStorage.getItem('access_token')?.replaceAll('"', '')
-      const temporaryId = localStorage.getItem('emporary-id')?.replaceAll('"', '')
 
       if (
         access_token &&
@@ -80,16 +85,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         config.headers['Authorization'] = `${access_token}`
       }
 
-      if (!access_token && temporaryId && temporaryId !== 'undefined') {
-        config.headers['temporary-id'] = `${temporaryId}`
-      }
-
       return config
     }
 
     const responseHeaders = (config: any) => {
       const access_token = localStorage.getItem('access_token')?.replaceAll('"', '')
-      const temporaryId = localStorage.getItem('emporary-id')?.replaceAll('"', '')
 
       if (
         access_token &&
@@ -99,11 +99,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       ) {
         config.headers['Authorization'] = `${access_token}`
       }
-
-      if (!access_token && temporaryId && temporaryId !== 'undefined') {
-        config.headers['temporary-id'] = `${temporaryId}`
-      }
-
       return config
     }
 
@@ -166,7 +161,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   }
 
-  const signin = async ({ data, callback }: any) => {
+  const signin = async ({ data, rememberMe, callback }: any) => {
     const body = new URLSearchParams()
     body.append('username', data.username)
     body.append('password', data.password)
@@ -185,7 +180,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           setToken(response.data.access_token)
           setRefreshToken(response.data.refresh_token)
           setFingerprint(fingerprint)
-          setTemporaryIdLS('')
         } else {
           setOnetimeAuth(true)
         }
@@ -212,7 +206,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         setToken(response.data.access_token)
         setRefreshToken(response.data.refresh_token)
         setFingerprint(fingerprint)
-        setTemporaryIdLS('')
       })
       .catch((error: any) => {
         //
@@ -223,14 +216,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     if (access_token && access_token !== 'null') {
-      setTemporaryIdLS('')
-
       const tokenData = jwtDecode(access_token)
       const isExpired = Date.now() >= (tokenData?.payload?.exp || 1) * 1000
 
       if (isExpired) {
         refresh()
-        setTemporaryIdLS('')
       }
     }
 
