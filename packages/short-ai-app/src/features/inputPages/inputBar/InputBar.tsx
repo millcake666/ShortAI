@@ -329,7 +329,7 @@ const FileSelector: RFCC<{ file: Blob; setUploadFile: any }> = ({ file, setUploa
         <UploadIconDisable />
         <Spacer space={20} />
         <Typography variant={'h2'} color={grey[400]} textAlign={'center'}>
-          Перетащите файл сюда или
+          Перетащите файл сюда или...
         </Typography>
       </Flex>
     )
