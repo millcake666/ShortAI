@@ -7,6 +7,7 @@ import { Navigate, useLocation, useNavigate } from 'react-router-dom'
 
 import { ROUTES } from '../../consts/routes'
 import { useLocalStorage } from '../hooks/useLocalStorage'
+import { useRefreshTokenRefreshPost } from '../api/generated/endpoints'
 
 const fpPromise = FingerprintJS.load({
   monitoring: false
@@ -37,6 +38,8 @@ interface AuthContextType {
   signin: (userData: any, callback?: VoidFunction) => void
   signout: (callback?: VoidFunction) => void
   authError: string
+  refresh_token: string | null
+  fingerprint: string
 }
 
 const AuthContext = React.createContext<AuthContextType>(null!)
@@ -71,8 +74,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const interceptorsInit = () => {
     const requestHeaders = (config: any) => {
       const access_token = localStorage.getItem('access_token')?.replaceAll('"', '')
-      const temporaryId = localStorage.getItem('emporary-id')?.replaceAll('"', '')
-
+      const temporaryId = localStorage.getItem('temporary-id')?.replaceAll('"', '')
+      const refresh_token = localStorage.getItem('refresh_token')?.replaceAll('"', '')
       if (
         access_token &&
         config &&
@@ -87,13 +90,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       }
 
       config.headers['finger-print'] = `${fingerprint}`
+      config.headers['refresh-token'] = `${refresh_token}`
 
       return config
     }
 
     const responseHeaders = (config: any) => {
       const access_token = localStorage.getItem('access_token')?.replaceAll('"', '')
-      const temporaryId = localStorage.getItem('emporary-id')?.replaceAll('"', '')
+      const temporaryId = localStorage.getItem('temporary-id')?.replaceAll('"', '')
 
       if (
         access_token &&
@@ -115,7 +119,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
     const errors = (error: any) => {
       if (error?.response?.status === 401) {
-        signout()
+        refresh()
       }
 
       const whatError =
@@ -181,7 +185,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       method: 'POST',
       url: '/token',
       headers: {
-        'finger-print': fingerprint,
+        'finger-print': fingerprintLS,
         'Content-Type': 'application/x-www-form-urlencoded'
       },
       data: body
@@ -210,7 +214,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       method: 'POST',
       url: '/refresh',
       headers: {
-        'finger-print': fingerprint,
+        'finger-print': fingerprintLS,
         'refresh-token': refresh_token,
         'Content-Type': 'application/json'
       }
@@ -218,12 +222,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       .then((response) => {
         setToken(response.data.access_token)
         setRefreshToken(response.data.refresh_token)
-        setFingerprint(fingerprint)
+        setFingerprint(fingerprintLS)
         setTemporaryIdLS('')
         setAuthError('')
       })
       .catch((error: any) => {
         setAuthError('error')
+        signout()
       })
 
     return result
@@ -257,7 +262,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   }, [])
 
-  const value = { user, signin, signout, access_token, refresh_token, isOnetimeAuth, authError }
+  const value = {
+    user,
+    signin,
+    signout,
+    access_token,
+    refresh_token,
+    isOnetimeAuth,
+    authError,
+    fingerprint
+  }
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 }
@@ -269,10 +283,20 @@ export const useAuth = () => {
 export function RequireAuth({ children }: { children: JSX.Element }) {
   const auth = useAuth()
   const location = useLocation()
+  const { mutate: refreshCreateMutation, data } = useRefreshTokenRefreshPost({
+    mutation: {
+      onSuccess: ({ data: _data }) => {
+        auth.access_token = _data.access_token
+        auth.refresh_token = _data.refresh_token
+      }
+    }
+  })
+  console.log('ASDASDSAD')
+  // refreshCreateMutation()
 
-  if (!auth.access_token && !auth.isOnetimeAuth) {
-    return <Navigate to={ROUTES.LOGIN} state={{ from: location }} replace />
-  }
+  // if (!auth.access_token && !auth.isOnetimeAuth) {
+  //   return <Navigate to={ROUTES.LOGIN} state={{ from: location }} replace />
+  // }
 
   return children
 }

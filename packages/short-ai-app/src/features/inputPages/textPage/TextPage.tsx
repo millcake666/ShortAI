@@ -4,12 +4,12 @@ import React from 'react'
 
 import { useCreateTaskTasksPost } from '../../api/generated/endpoints'
 import { Flex, Pad, Spacer } from '../../primitives'
-import { InputBar } from '../inputBar/InputBar'
+import { InputPage } from '../inputBar/InputPage'
 
 export const TextPage = () => {
   return (
     <div>
-      <InputBar page="text" />
+      <InputPage page="text" />
       <Spacer space={40} />
     </div>
   )

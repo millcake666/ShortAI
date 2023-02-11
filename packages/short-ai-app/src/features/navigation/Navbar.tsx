@@ -117,17 +117,17 @@ const AvatarMenu = () => {
             Сохраненные текста
           </Typography>
         </MenuItem>
-        <MenuItem>
-          <ListItemIcon>
-            <DarkmodeIcon />
-          </ListItemIcon>
-          <Typography variant={'body1'} color={grey[600]}>
-            Темная тема
-          </Typography>
-          <Pad pad={'0 0 0 20px'}>
-            <Switch size={'small'} />
-          </Pad>
-        </MenuItem>
+        {/*<MenuItem>*/}
+        {/*  <ListItemIcon>*/}
+        {/*    <DarkmodeIcon />*/}
+        {/*  </ListItemIcon>*/}
+        {/*  <Typography variant={'body1'} color={grey[600]}>*/}
+        {/*    Темная тема*/}
+        {/*  </Typography>*/}
+        {/*  <Pad pad={'0 0 0 20px'}>*/}
+        {/*    <Switch size={'small'} />*/}
+        {/*  </Pad>*/}
+        {/*</MenuItem>*/}
         <MenuItem onClick={handleClose}>
           <ListItemIcon>
             <LogoutIcon />

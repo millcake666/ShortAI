@@ -53,7 +53,7 @@ const optionMap: { [key: string]: number } = {
   file: 2
 }
 
-export const InputBar: RFCC<{ page: TaskType }> = ({ page }) => {
+export const InputPage: RFCC<{ page: TaskType }> = ({ page }) => {
   const navigate = useNavigate()
   const [uploadFile, setUploadFile] = useState(null)
   const [temporary_idLS, setTemporaryIdLS] = useLocalStorage('temporary_id', '')
@@ -72,6 +72,8 @@ export const InputBar: RFCC<{ page: TaskType }> = ({ page }) => {
     // console.log(event.target.value)
   }
 
+  // хранение task id
+
   // upload logic
   const { mutate: uploadMutation } = useUploadFileTasksTaskIdFilePost()
 
@@ -83,8 +85,9 @@ export const InputBar: RFCC<{ page: TaskType }> = ({ page }) => {
           const taskId: number = _data.id as any
 
           uploadMutation({ taskId, data: { file: uploadFile } })
-
-          console.log('tyt')
+          console.log(_data.id)
+        } else if (page != 'file') {
+          navigate(ROUTES.RESULT, { state: { taskId: _data.id } })
         }
       }
     }
@@ -253,7 +256,6 @@ export const InputBar: RFCC<{ page: TaskType }> = ({ page }) => {
               size={'medium'}
               onClick={() => {
                 handlerCreateTask(uploadFile)
-                navigate(ROUTES.RESULT)
               }}
               disabled={valueText == '' && valueUrl == '' && !uploadFile}
             >

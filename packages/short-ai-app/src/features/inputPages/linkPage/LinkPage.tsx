@@ -4,12 +4,12 @@ import React from 'react'
 
 import { Spacer } from '../../primitives'
 import { LinkMicroIcon } from '../icon/LinkMicroIcon'
-import { InputBar } from '../inputBar/InputBar'
+import { InputPage } from '../inputBar/InputPage'
 
 export const LinkPage = () => {
   return (
     <div>
-      <InputBar page="url" />
+      <InputPage page="url" />
       <Spacer space={20} />
     </div>
   )
