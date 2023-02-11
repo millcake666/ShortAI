@@ -79,7 +79,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         !('' + config?.url)?.includes('/token') &&
         !(('' + config?.url)?.includes('/user') && config?.method === 'post')
       ) {
-        config.headers['Authorization'] = `${access_token}`
+        config.headers['Authorization'] = `Bearer ${access_token}`
       }
 
       if (!access_token && temporaryId && temporaryId !== 'undefined') {

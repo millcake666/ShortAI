@@ -72,7 +72,7 @@ export const InputBar: RFCC<{ page: TaskType }> = ({ page }) => {
     // console.log(event.target.value)
   }
 
-  //upload logic
+  // upload logic
   const { mutate: uploadMutation } = useUploadFileTasksTaskIdFilePost()
 
   // create task post
@@ -253,6 +253,7 @@ export const InputBar: RFCC<{ page: TaskType }> = ({ page }) => {
               size={'medium'}
               onClick={() => {
                 handlerCreateTask(uploadFile)
+                navigate(ROUTES.RESULT)
               }}
               disabled={valueText == '' && valueUrl == '' && !uploadFile}
             >
@@ -294,9 +295,9 @@ export const InputBar: RFCC<{ page: TaskType }> = ({ page }) => {
                 <DropZoneWrap {...getRootProps({ className: 'dropzone' })}>
                   <input {...getInputProps()} />
                   <FileSelector file={acceptedFiles[0]} setUploadFile={setUploadFile} />
-                  {/*<Button size={'small'} variant={'outlined'} onClick={openDialog}>*/}
-                  {/*  <Typography variant={'body1'}>Выберите его</Typography>*/}
-                  {/*</Button>*/}
+                  <Button size={'small'} variant={'outlined'} onClick={openDialog}>
+                    <Typography variant={'body1'}>Выберите его</Typography>
+                  </Button>
                 </DropZoneWrap>
               </div>
             )
@@ -308,34 +309,30 @@ export const InputBar: RFCC<{ page: TaskType }> = ({ page }) => {
 }
 
 const FileSelector: RFCC<{ file: Blob; setUploadFile: any }> = ({ file, setUploadFile }) => {
-  // useEffect(() => {
-  //   if (file) {
-  //     setUploadFile(file || null)
-  //   }
-  // }, [file])
+  useEffect(() => {
+    if (file) {
+      setUploadFile(file || null)
+    }
+  }, [file])
 
   if (file) {
     return (
       <Flex flexDirection={'column'} alignItems={'center'}>
-        {/*<UploadIcon />*/}
-        <SadIcon />
+        <UploadIcon />
         <Spacer space={20} />
-        {/*<Typography variant={'h4'} textAlign={'center'}>*/}
-        {/*  {file.name}*/}
-        {/*</Typography>*/}
-        <Typography variant={'h2'} color={grey[400]} textAlign={'center'}>
-          Извините, функция временно недоступна
+        <Typography variant={'h4'} textAlign={'center'}>
+          {file.name}
         </Typography>
+        <Typography variant={'h2'} color={grey[400]} textAlign={'center'}></Typography>
       </Flex>
     )
   } else {
     return (
       <Flex flexDirection={'column'} alignItems={'center'}>
-        {/*<UploadIconDisable />*/}
-        <SadIcon />
+        <UploadIconDisable />
         <Spacer space={20} />
         <Typography variant={'h2'} color={grey[400]} textAlign={'center'}>
-          Извините, функция временно недоступна
+          Перетащите файл сюда или
         </Typography>
       </Flex>
     )
