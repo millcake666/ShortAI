@@ -22,7 +22,7 @@ let fingerprint = ''
   fingerprint = result.visitorId
 })()
 
-axios.defaults.baseURL = 'http://151.248.122.104:8000'
+axios.defaults.baseURL = 'http://shrtai.ru/api'
 
 interface AuthContextType {
   user: {
