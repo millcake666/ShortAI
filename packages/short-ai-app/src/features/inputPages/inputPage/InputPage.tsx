@@ -89,6 +89,12 @@ export const InputPage: RFCC<{ page: TaskType }> = ({ page }) => {
         } else if (page != 'file') {
           navigate(ROUTES.RESULT, { state: { taskId: _data.id } })
         }
+      },
+      onError: (error) => {
+        // console.log(error)
+        if (error.response?.status == 401) {
+          handlerCreateTask(uploadFile)
+        }
       }
     }
   })

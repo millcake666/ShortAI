@@ -4,7 +4,7 @@ import React from 'react'
 
 import { Spacer } from '../../primitives'
 import { LinkMicroIcon } from '../icon/LinkMicroIcon'
-import { InputPage } from '../inputBar/InputPage'
+import { InputPage } from '../inputPage/InputPage'
 
 export const LinkPage = () => {
   return (

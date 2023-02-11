@@ -4,7 +4,7 @@ import React from 'react'
 
 import { useCreateTaskTasksPost } from '../../api/generated/endpoints'
 import { Flex, Pad, Spacer } from '../../primitives'
-import { InputPage } from '../inputBar/InputPage'
+import { InputPage } from '../inputPage/InputPage'
 
 export const TextPage = () => {
   return (
