@@ -15,45 +15,53 @@ import { CopyIcon } from './icon/CopyIcon'
 import { useEffect, useRef, useState } from 'react'
 import { FeedbackStars } from './FeedbackStars'
 import { Spacer } from '../primitives'
-import { Result } from '../api/generated/models'
+import { Result, TaskStatus } from '../api/generated/models'
+import { LoaderBanner } from './LoaderBanner'
 
 export const ResultPage = () => {
   const navigate = useNavigate()
   const location = useLocation()
   const { data } = useGetTaskTasksTaskIdGet(location.state.taskId)
-  const resp_text = data?.data.short_summary?.text
+  const respText = data?.data.short_summary?.text
+  const respStatus: TaskStatus | undefined = data?.data.status
   let text = ''
-  if (resp_text !== undefined) {
-    text = resp_text
+  if (respText !== undefined) {
+    text = respText
   }
 
   return (
     <div>
-      <Row style={{ justifyContent: 'space-between' }}>
-        <Col md={12} lg={3}>
-          <Button
-            startIcon={<BackArrowIcon />}
-            onClick={() => {
-              navigate(ROUTES.HOME)
-            }}
-          >
-            <Typography variant={'h4'} style={{ whiteSpace: 'nowrap' }}>
-              Новый текст
-            </Typography>
-          </Button>
-        </Col>
-        <Col md={12} lg={3}>
-          {/*<Button startIcon={<SaveIcon />}>Сохранить</Button>*/}
-          <Button startIcon={<CopyIcon />} onClick={() => navigator.clipboard.writeText(text)}>
-            <Typography variant={'h4'} color={blue[500]}>
-              Скопировать
-            </Typography>
-          </Button>
-        </Col>
-      </Row>
-      <ResultTextWrap>{text}</ResultTextWrap>
-      <Spacer space={50} />
-      <FeedbackStars />
+      {respStatus != TaskStatus.completed ? (
+        <LoaderBanner statusText={'Сокращаем текст'} />
+      ) : (
+        <div>
+          <Row style={{ justifyContent: 'space-between' }}>
+            <Col md={12} lg={3}>
+              <Button
+                startIcon={<BackArrowIcon />}
+                onClick={() => {
+                  navigate(ROUTES.HOME)
+                }}
+              >
+                <Typography variant={'h4'} style={{ whiteSpace: 'nowrap' }}>
+                  Новый текст
+                </Typography>
+              </Button>
+            </Col>
+            <Col md={12} lg={3}>
+              {/*<Button startIcon={<SaveIcon />}>Сохранить</Button>*/}
+              <Button startIcon={<CopyIcon />} onClick={() => navigator.clipboard.writeText(text)}>
+                <Typography variant={'h4'} color={blue[500]}>
+                  Скопировать
+                </Typography>
+              </Button>
+            </Col>
+          </Row>
+          <ResultTextWrap>{text}</ResultTextWrap>
+          <Spacer space={50} />
+          <FeedbackStars />
+        </div>
+      )}
     </div>
   )
 }

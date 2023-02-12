@@ -5,7 +5,7 @@ import Dropzone from 'react-dropzone'
 
 import { Pad, Spacer } from '../../primitives'
 import { LinkMicroIcon } from '../icon/LinkMicroIcon'
-import { UploadIcon } from '../icon/UploadIconDisable'
+import { UploadIcon } from '../icon/UploadIcon'
 import { grey } from '@mui/material/colors'
 
 export const DropInput = () => {
