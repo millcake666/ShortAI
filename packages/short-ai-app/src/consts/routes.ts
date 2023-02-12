@@ -7,5 +7,6 @@ export const ROUTES = {
   TEXT: '/text',
   LINK: '/link',
   FILE: '/file',
-  RESULT: '/result'
+  RESULT: '/result',
+  FORGOT: '/forgot'
 }

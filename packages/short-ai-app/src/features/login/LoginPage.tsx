@@ -9,6 +9,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { ROUTES } from '../../consts/routes'
 import { useAuth } from '../auth/AuthProvider'
 import { Flex, Spacer } from '../primitives'
+import { blue, grey } from '../themingAndStyling/theme'
 
 export const LoginPage = () => {
   const navigate = useNavigate()
@@ -50,16 +51,37 @@ export const LoginPage = () => {
           </Typography>
           <Spacer />
           <Link to={ROUTES.HOME}>
-            <Button variant="contained">HOME</Button>
+            <Button variant="contained">На главную</Button>
           </Link>
         </Flex>
       ) : (
         <Flex flexDirection="column" alignItems="center" justifyContent="center">
           <Spacer />
-          <Typography variant="h2" textAlign="center">
-            <b>Вход</b>
-          </Typography>
-          <Spacer />
+
+          <Flex justifyContent={'center'} alignItems={'center'}>
+            <Typography variant="h2" textAlign="center" color={blue[500]}>
+              <u>Вход</u>
+            </Typography>
+            <Button
+              onClick={() => {
+                navigate(ROUTES.REG)
+              }}
+            >
+              <Typography variant={'h2'} color={grey[500]}>
+                Регистрация
+              </Typography>
+            </Button>
+          </Flex>
+          <Spacer space={10} />
+
+          <Flex>
+            {(errors.username || errors.password || auth.authError) && (
+              <Alert variant="filled" severity="error">
+                <div>{errors?.network?.message?.toString() || 'Неправильный логин или пароль'}</div>
+              </Alert>
+            )}
+          </Flex>
+          <Spacer space={10} />
 
           <TextField
             {...register('username', { required: 'Заполните логин' })}
@@ -70,6 +92,7 @@ export const LoginPage = () => {
             error={!!errors.username}
           />
           <Spacer />
+
           <TextField
             {...register('password', { required: 'Заполните пароль' })}
             label="Пароль"
@@ -79,47 +102,62 @@ export const LoginPage = () => {
             fullWidth
             error={!!errors.username}
           />
+          <Spacer space={5} />
 
-          <Spacer space={30} />
-          {false ? (
-            <CircularProgress />
-          ) : (
-            <>
-              <Button
-                variant="contained"
-                fullWidth
-                size="large"
-                type="submit"
-                onClick={() => clearErrors()}
+          <UnderHover>
+            <a
+            // onClick={() => {
+            //   navigate(ROUTES.FORGOT)
+            // }}
+            >
+              Забыли пароль?
+            </a>
+          </UnderHover>
+          <Spacer space={20} />
+
+          <Button
+            variant="contained"
+            fullWidth
+            size="medium"
+            type="submit"
+            onClick={() => clearErrors()}
+          >
+            Войти
+          </Button>
+          <Spacer />
+          <Typography>
+            У вас нет аккаунта?{' '}
+            <RegW>
+              <a
+                onClick={() => {
+                  navigate(ROUTES.REG)
+                }}
               >
-                Войти
-              </Button>
-              <Spacer />
-              <Button
-                variant="outlined"
-                fullWidth
-                size="large"
-                onClick={() => navigate(ROUTES.REG)}
-              >
-                Регистрация
-              </Button>
-              <Spacer />
-              <Flex>
-                {(errors.username || errors.password || auth.authError) && (
-                  <Alert variant="filled" severity="error">
-                    <div>
-                      {errors?.network?.message?.toString() || 'Неправильный логин или пароль'}
-                    </div>
-                  </Alert>
-                )}
-              </Flex>
-            </>
-          )}
+                Зарегистрируйтесь
+              </a>
+            </RegW>
+          </Typography>
         </Flex>
       )}
     </Form>
   )
 }
+
+const RegW = styled.span`
+  color: #1c40ff;
+  &:hover {
+    text-decoration: underline #1c40ff;
+  }
+`
+
+const UnderHover = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: end;
+  &:hover {
+    text-decoration: underline black;
+  }
+`
 
 const Form = styled.form`
   max-width: 480px;

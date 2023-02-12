@@ -50,7 +50,7 @@ export const blueDark = {
   900: '#070F3D'
 }
 
-const grey = {
+export const grey = {
   50: '#F3F6F9',
   100: '#E7EBF0',
   200: '#E0E3E7',
@@ -276,6 +276,13 @@ export const themeOptions: ThemeOptions = {
         thumb: {
           height: 16,
           width: 16
+        }
+      }
+    },
+    MuiTextField: {
+      styleOverrides: {
+        root: {
+          borderRadius: '8px'
         }
       }
     }

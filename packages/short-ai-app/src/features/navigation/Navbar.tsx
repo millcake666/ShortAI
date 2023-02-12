@@ -16,7 +16,7 @@ import {
 } from '@mui/material'
 import { grey } from '@mui/material/colors'
 import React, { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 import { ROUTES } from '../../consts/routes'
 import { AuthProvider, useAuth } from '../auth/AuthProvider'
@@ -33,6 +33,7 @@ import { LogoutIcon } from './LogoutIcon'
 export const Navbar = () => {
   const navigate = useNavigate()
   const auth = useAuth()
+  const location = useLocation()
 
   return (
     <div>
@@ -40,16 +41,24 @@ export const Navbar = () => {
         <Flex as="button" onClick={() => navigate(ROUTES.HOME)} alignItems={'center'}>
           <Logo />
         </Flex>
-        {auth.access_token ? (
-          <AvatarMenu />
+        {location.pathname == ROUTES.REG ||
+        location.pathname == ROUTES.LOGIN ||
+        location.pathname == ROUTES.FORGOT ? (
+          <></>
         ) : (
-          <Button
-            size={'small'}
-            onClick={() => navigate(ROUTES.LOGIN)}
-            style={{ backgroundColor: blue[100], color: blue[500], borderColor: blue[500] }}
-          >
-            Войти
-          </Button>
+          <>
+            {auth.access_token ? (
+              <AvatarMenu />
+            ) : (
+              <Button
+                size={'small'}
+                onClick={() => navigate(ROUTES.LOGIN)}
+                style={{ backgroundColor: blue[100], color: blue[500], borderColor: blue[500] }}
+              >
+                Войти
+              </Button>
+            )}
+          </>
         )}
       </NavWrap>
       <Spacer />
