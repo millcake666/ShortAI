@@ -17,11 +17,14 @@ import { FeedbackStars } from './FeedbackStars'
 import { Spacer } from '../primitives'
 import { Result, TaskStatus } from '../api/generated/models'
 import { LoaderBanner } from './LoaderBanner'
+import {useLocalStorage} from "../hooks/useLocalStorage";
 
 export const ResultPage = () => {
   const navigate = useNavigate()
   const location = useLocation()
-  const { data } = useGetTaskTasksTaskIdGet(location.state.taskId)
+  const [temporary_idLS, setTemporaryIdLS] = useLocalStorage('temporary_id', '')
+
+  const { data } = useGetTaskTasksTaskIdGet(location.state.taskId, {query: {refetchInterval: 3000}, axios:{headers: {"temporary-id": temporary_idLS}}})
   const respText = data?.data.short_summary?.text
   const respStatus: TaskStatus | undefined = data?.data.status
   let text = ''

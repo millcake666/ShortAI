@@ -89,6 +89,8 @@ export const InputPage: RFCC<{ page: TaskType }> = ({ page }) => {
         } else if (page != 'file') {
           navigate(ROUTES.RESULT, { state: { taskId: _data.id } })
         }
+
+        setTemporaryIdLS(_data.temporary_id)
       },
       onError: (error) => {
         // console.log(error)

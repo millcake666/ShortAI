@@ -45,7 +45,7 @@ export const HomePage = () => {
   return (
     <div>
       <Flex flexDirection={'column'} justifyContent={'space-between'}>
-        <Typography variant={'h2'} alignItems={'center'} textAlign={'center'}>
+        <Typography variant={'h2'} alignItems={'center'} textAlign={'center'} style={{height: "100px"}}>
           {varText[value]}
         </Typography>
         <Spacer space={30} />
@@ -63,7 +63,8 @@ export const HomePage = () => {
         width={'100%'}
         flexDirection={'column'}
         alignItems={'center'}
-        style={{ backgroundColor: theme.palette.primary.main, borderRadius: '40px' }}
+        justifyContent={'center'}
+        style={{ backgroundColor: theme.palette.primary.main, borderRadius: '40px', maxWidth: '800px', margin: 'auto'}}
       >
         <Spacer space={50} />
         <Typography variant={'h1'} style={{ color: '#ffffff' }} textAlign={'center'}>
