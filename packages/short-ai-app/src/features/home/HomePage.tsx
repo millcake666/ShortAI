@@ -45,7 +45,7 @@ export const HomePage = () => {
   return (
     <div>
       <Flex flexDirection={'column'} justifyContent={'space-between'}>
-        <Typography variant={'h2'} alignItems={'center'} textAlign={'center'} style={{height: "100px"}}>
+        <Typography variant={'h2'} alignItems={'center'} textAlign={'center'}>
           {varText[value]}
         </Typography>
         <Spacer space={30} />
