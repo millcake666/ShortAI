@@ -63,7 +63,8 @@ export const HomePage = () => {
         width={'100%'}
         flexDirection={'column'}
         alignItems={'center'}
-        style={{ backgroundColor: theme.palette.primary.main, borderRadius: '40px' }}
+        justifyContent={'center'}
+        style={{ backgroundColor: theme.palette.primary.main, borderRadius: '40px', maxWidth: '800px', margin: 'auto'}}
       >
         <Spacer space={50} />
         <Typography variant={'h1'} style={{ color: '#ffffff' }} textAlign={'center'}>

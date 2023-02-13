@@ -10,6 +10,8 @@ import { useCreateUserUserPost } from '../api/generated/endpoints'
 import { UserCreate } from '../api/generated/models'
 import { useAuth } from '../auth/AuthProvider'
 import { Error, Flex, Spacer } from '../primitives'
+import { blue, grey } from '../themingAndStyling/theme'
+import { BREAKPOINTS } from '../../consts/common'
 
 export const RegPage = () => {
   const navigate = useNavigate()
@@ -40,6 +42,7 @@ export const RegPage = () => {
   })
   const methods = useForm()
   const { handleSubmit, formState, getValues, register, watch, trigger } = methods
+  const { clearErrors } = methods
 
   const fromPage = location.state?.from?.pathname || '/'
   const errors = formState.errors
@@ -65,40 +68,64 @@ export const RegPage = () => {
   }, [password_confirmation, trigger])
 
   return (
-    <FormProvider {...methods}>
-      <Form onSubmit={handleSubmit(onSubmit)}>
-        <Spacer />
-        <Typography variant="h2" textAlign="center">
-          <b>Регистрация</b>
-        </Typography>
-        <Spacer />
+    <Flex flexDirection={'column'} alignItems={'center'}>
+      <Flex width={480}>
+        <FormProvider {...methods}>
+          <Form
+            onSubmit={handleSubmit(onSubmit)}
+            onChange={(e) => {
+              clearErrors()
+            }}
+            onBlur={(e) => {
+              clearErrors()
+            }}
+          >
+            <Flex justifyContent="center" alignItems="center">
+              {formError && (
+                <Alert variant="filled" severity="error">
+                  {formError || 'Network error'}
+                </Alert>
+              )}
+            </Flex>
 
-        <Row>
-          <Col lg={12}>
-            <TextField
-              {...register('login', { required: 'Fill out name' })}
-              label="Логин"
-              variant="outlined"
-              fullWidth
-              error={!!errors.login}
-            />
-            <Error name="login" />
-          </Col>
-        </Row>
+            <Flex flexDirection="column" alignItems="center" justifyContent="center">
+              <Spacer />
 
-        <TextField
-          {...register('email', { required: 'Fill out email' })}
-          label="E-mail"
-          variant="outlined"
-          fullWidth
-          autoComplete="email"
-          error={!!errors.email}
-        />
-        <Error name="email" />
+              <Flex justifyContent={'center'} alignItems={'center'}>
+                <Button
+                  onClick={() => {
+                    navigate(ROUTES.LOGIN)
+                  }}
+                >
+                  <Typography variant="h2" textAlign="center" color={grey[500]}>
+                    Вход
+                  </Typography>
+                </Button>
+                <Typography variant={'h2'} color={blue[500]}>
+                  <u>Регистрация</u>
+                </Typography>
+              </Flex>
+              <Spacer />
 
-        <Row>
-          <Col lg={6}>
-            <div>
+              <TextField
+                {...register('login', { required: 'Fill out name' })}
+                label="Логин"
+                variant="outlined"
+                fullWidth
+                error={!!errors.login}
+              />
+              <Error name="login" />
+
+              <TextField
+                {...register('email', { required: 'Fill out email' })}
+                label="E-mail"
+                variant="outlined"
+                fullWidth
+                autoComplete="email"
+                error={!!errors.email}
+              />
+              <Error name="email" />
+
               <TextField
                 {...register('password', {
                   required: 'Fill out password',
@@ -106,57 +133,55 @@ export const RegPage = () => {
                     value === formValues.password_confirmation || 'The passwords do not match'
                 })}
                 error={!!errors.password}
-                label="Password"
+                label="Пароль"
                 variant="outlined"
                 type="password"
                 autoComplete="current-password"
                 fullWidth
               />
               <Error name="password" />
-            </div>
-          </Col>
-          <Col lg={6}>
-            <TextField
-              {...register('password_confirmation', {
-                required: 'Fill out password confirmation',
-                validate: (value) => value === formValues.password || 'The passwords do not match'
-              })}
-              error={!!errors.password_confirmation}
-              label="Password confirmation"
-              variant="outlined"
-              type="password"
-              autoComplete="current-password"
-              fullWidth
-            />
-            <Error name="password_confirmation" />
-          </Col>
-        </Row>
 
-        <Spacer space={20} />
+              <TextField
+                {...register('password_confirmation', {
+                  required: 'Fill out password confirmation',
+                  validate: (value) => value === formValues.password || 'The passwords do not match'
+                })}
+                error={!!errors.password_confirmation}
+                label="Подтвердите пароль"
+                variant="outlined"
+                type="password"
+                autoComplete="current-password"
+                fullWidth
+              />
+              <Error name="password_confirmation" />
+              <Spacer />
 
-        <Button variant="contained" fullWidth size="large" type="submit">
-          REGISTER
-        </Button>
+              <Button variant="contained" fullWidth size="medium" type="submit">
+                Войти
+              </Button>
+              <Spacer />
 
-        <Spacer />
-
-        <Button variant="outlined" fullWidth size="large" onClick={() => navigate(ROUTES.LOGIN)}>
-          LOGIN
-        </Button>
-
-        <Spacer />
-
-        <Flex justifyContent="center" alignItems="center">
-          {formError && (
-            <Alert variant="filled" severity="error">
-              {formError || 'Network error'}
-            </Alert>
-          )}
-        </Flex>
-      </Form>
-    </FormProvider>
+              <Typography>
+                У вас уже есть аккаунт?{' '}
+                <RegW>
+                  <a onClick={() => navigate(ROUTES.LOGIN)}>Войдите</a>
+                </RegW>
+              </Typography>
+              <Spacer />
+            </Flex>
+          </Form>
+        </FormProvider>
+      </Flex>
+    </Flex>
   )
 }
+
+const RegW = styled.span`
+  color: #1c40ff;
+  &:hover {
+    text-decoration: underline #1c40ff;
+  }
+`
 
 const Form = styled.form`
   max-width: 880px;

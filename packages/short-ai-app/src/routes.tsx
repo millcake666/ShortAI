@@ -63,5 +63,11 @@ export const routes = [
     path: ROUTES.RESULT,
     privatePage: false,
     featureActive: true
+  },
+  {
+    element: <ForgotPasswordPage />,
+    path: ROUTES.FORGOT,
+    privatePage: false,
+    featureActive: true
   }
 ]

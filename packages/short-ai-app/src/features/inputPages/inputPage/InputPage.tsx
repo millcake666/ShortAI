@@ -53,7 +53,7 @@ const optionMap: { [key: string]: number } = {
   file: 2
 }
 
-export const InputBar: RFCC<{ page: TaskType }> = ({ page }) => {
+export const InputPage: RFCC<{ page: TaskType }> = ({ page }) => {
   const navigate = useNavigate()
   const [uploadFile, setUploadFile] = useState(null)
   const [temporary_idLS, setTemporaryIdLS] = useLocalStorage('temporary_id', '')
@@ -72,7 +72,9 @@ export const InputBar: RFCC<{ page: TaskType }> = ({ page }) => {
     // console.log(event.target.value)
   }
 
-  //upload logic
+  // хранение task id
+
+  // upload logic
   const { mutate: uploadMutation } = useUploadFileTasksTaskIdFilePost()
 
   // create task post
@@ -83,8 +85,17 @@ export const InputBar: RFCC<{ page: TaskType }> = ({ page }) => {
           const taskId: number = _data.id as any
 
           uploadMutation({ taskId, data: { file: uploadFile } })
+          console.log(_data.id)
+        } else if (page != 'file') {
+          navigate(ROUTES.RESULT, { state: { taskId: _data.id } })
+        }
 
-          console.log('tyt')
+        setTemporaryIdLS(_data.temporary_id)
+      },
+      onError: (error) => {
+        // console.log(error)
+        if (error.response?.status == 401) {
+          handlerCreateTask(uploadFile)
         }
       }
     }
@@ -294,9 +305,9 @@ export const InputBar: RFCC<{ page: TaskType }> = ({ page }) => {
                 <DropZoneWrap {...getRootProps({ className: 'dropzone' })}>
                   <input {...getInputProps()} />
                   <FileSelector file={acceptedFiles[0]} setUploadFile={setUploadFile} />
-                  {/*<Button size={'small'} variant={'outlined'} onClick={openDialog}>*/}
-                  {/*  <Typography variant={'body1'}>Выберите его</Typography>*/}
-                  {/*</Button>*/}
+                  <Button size={'small'} variant={'outlined'} onClick={openDialog}>
+                    <Typography variant={'body1'}>Выберите его</Typography>
+                  </Button>
                 </DropZoneWrap>
               </div>
             )
@@ -308,34 +319,30 @@ export const InputBar: RFCC<{ page: TaskType }> = ({ page }) => {
 }
 
 const FileSelector: RFCC<{ file: Blob; setUploadFile: any }> = ({ file, setUploadFile }) => {
-  // useEffect(() => {
-  //   if (file) {
-  //     setUploadFile(file || null)
-  //   }
-  // }, [file])
+  useEffect(() => {
+    if (file) {
+      setUploadFile(file || null)
+    }
+  }, [file])
 
   if (file) {
     return (
       <Flex flexDirection={'column'} alignItems={'center'}>
-        {/*<UploadIcon />*/}
-        <SadIcon />
+        <UploadIcon />
         <Spacer space={20} />
-        {/*<Typography variant={'h4'} textAlign={'center'}>*/}
-        {/*  {file.name}*/}
-        {/*</Typography>*/}
-        <Typography variant={'h2'} color={grey[400]} textAlign={'center'}>
-          Извините, функция временно недоступна
+        <Typography variant={'h4'} textAlign={'center'}>
+          {file.name}
         </Typography>
+        <Typography variant={'h2'} color={grey[400]} textAlign={'center'}></Typography>
       </Flex>
     )
   } else {
     return (
       <Flex flexDirection={'column'} alignItems={'center'}>
-        {/*<UploadIconDisable />*/}
-        <SadIcon />
+        <UploadIconDisable />
         <Spacer space={20} />
         <Typography variant={'h2'} color={grey[400]} textAlign={'center'}>
-          Извините, функция временно недоступна
+          Перетащите файл сюда или
         </Typography>
       </Flex>
     )
