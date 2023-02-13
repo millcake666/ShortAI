@@ -33,6 +33,8 @@ import { HistIcon } from './HistIcon'
 import { Logo } from './Logo'
 import { LogoutIcon } from './LogoutIcon'
 
+const IS_DEV = process.env.NODE_ENV === 'development'
+
 export const Navbar = () => {
   const navigate = useNavigate()
   const auth = useAuth()
@@ -73,7 +75,6 @@ const AvatarMenu = () => {
   const navigate = useNavigate()
   const { signout } = useAuth()
   const theme = useTheme()
-  console.log('🐸 Pepe said => AvatarMenu => theme.palette.mode', theme.palette.mode)
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
   const open = Boolean(anchorEl)
@@ -131,19 +132,21 @@ const AvatarMenu = () => {
             Сохраненные текста
           </Typography>
         </MenuItem>
-        <MenuItem>
-          <ListItemIcon>
-            <DarkmodeIcon />
-          </ListItemIcon>
-          <Typography variant={'body1'} color={grey[600]}>
-            Темная тема*
-          </Typography>
-          <Pad pad={'0 0 0 20px'}>
-            <ThemeSwitcher>
-              <Switch size={'small'} checked={theme.palette.mode === 'dark'} />
-            </ThemeSwitcher>
-          </Pad>
-        </MenuItem>
+        {IS_DEV ? (
+          <MenuItem>
+            <ListItemIcon>
+              <DarkmodeIcon />
+            </ListItemIcon>
+            <Typography variant={'body1'} color={grey[600]}>
+              Темная тема*
+            </Typography>
+            <Pad pad={'0 0 0 20px'}>
+              <ThemeSwitcher>
+                <Switch size={'small'} checked={theme.palette.mode === 'dark'} />
+              </ThemeSwitcher>
+            </Pad>
+          </MenuItem>
+        ) : null}
         <MenuItem
           onClick={() => {
             handleClose()
