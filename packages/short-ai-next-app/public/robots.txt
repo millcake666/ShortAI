@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://shrtai.ru
+
+# Sitemaps
+Sitemap: https://shrtai.ru/sitemap.xml

@@ -66,7 +66,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setUser(null)
     setToken('')
     setRefreshToken('')
-    // setFingerprint('')
     navigate(ROUTES.LOGIN)
     callback?.()
   }
@@ -90,7 +89,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       }
 
       config.headers['finger-print'] = `${fingerprint}`
-      config.headers['refresh-token'] = `${refresh_token}`
 
       return config
     }

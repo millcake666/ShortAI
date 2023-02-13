@@ -105,13 +105,7 @@ const ButtonWrap = styled.div`
   flex-direction: column;
   row-gap: 12px;
 `
-const HeadingWrapper = styled.div`
-  /* min-height: 150px;
-
-  @media (max-width: 768px) {
-    min-height: 300px;
-  } */
-`
+const HeadingWrapper = styled.div``
 // const marks = [
 //     {
 //         value: 1,

@@ -78,7 +78,12 @@ export const InputPage: RFCC<{ page: TaskType }> = ({ page }) => {
   const { mutate: uploadMutation } = useUploadFileTasksTaskIdFilePost()
 
   // create task post
-  const { mutate: taskCreateMutation, data } = useCreateTaskTasksPost({
+  const {
+    mutate: taskCreateMutation,
+    data,
+    error,
+    isError
+  } = useCreateTaskTasksPost({
     mutation: {
       onSuccess: ({ data: _data }) => {
         if (page == 'file' && _data && uploadFile != null) {
@@ -100,6 +105,8 @@ export const InputPage: RFCC<{ page: TaskType }> = ({ page }) => {
       }
     }
   })
+  console.log('🐸 Pepe said => error', error)
+
   const handlerCreateTask = (file: Blob | null) => {
     const task: TaskIn = {
       type: page,
@@ -333,7 +340,7 @@ const FileSelector: RFCC<{ file: Blob; setUploadFile: any }> = ({ file, setUploa
         <Typography variant={'h4'} textAlign={'center'}>
           {file.name}
         </Typography>
-        <Typography variant={'h2'} color={grey[400]} textAlign={'center'}></Typography>
+        <Typography variant={'h2'} color={grey[400]} textAlign={'center'} />
       </Flex>
     )
   } else {
