@@ -12,14 +12,14 @@ const fpPromise = FingerprintJS.load({
   monitoring: false
 })
 
-let fingerprint = ''
+let fingerprint = localStorage.getItem('fingerprint')?.replaceAll('"', '')
 
 ;(async () => {
   // Get the visitor identifier when you need it.
   const fp = await fpPromise
   const result = await fp.get()
   // @ts-ignore
-  fingerprint = result.visitorId
+  fingerprint = fingerprint ? fingerprint : result.visitorId
 })()
 
 axios.defaults.baseURL = 'http://151.248.122.104:8000'
