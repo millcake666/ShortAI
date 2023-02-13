@@ -1,3 +1,5 @@
+SHORT AI NEXTJS APP
+
 https://nextjs.org/learn/foundations/about-nextjs/what-is-nextjs
 
 просто перенеси все роуты из routes.tsx в отельные папки

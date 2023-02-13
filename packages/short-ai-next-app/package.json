@@ -4,11 +4,11 @@
   "description": "short-ai react app",
   "main": "index.js",
   "scripts": {
-    "start": "vite",
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview",
-    "prepare": "husky install"
+    "start": "next start",
+    "dev": "next dev",
+    "build": "next build && next export",
+    "postbuild": "next-sitemap",
+    "lint": "next lint"
   },
   "dependencies": {
     "@mui/x-date-pickers-pro": "5.0.10",

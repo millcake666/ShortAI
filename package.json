@@ -14,7 +14,9 @@
   "types": "./types/index.d.ts",
   "scripts": {
     "dev": "yarn workspace @short-ai/short-ai-app start",
+    "dev:next": "yarn workspace @short-ai/short-ai-next-app dev",
     "build": "yarn workspace @short-ai/short-ai-app build",
+    "build:next": "yarn workspace @short-ai/short-ai-next-app build",
     "orval": "npx orval && npx prettier --config ./.prettierrc --write ./packages/short-ai-app/src/features/api/generated/* && npx eslint --fix ./packages/short-ai-app/src/features/api/generated/*",
     "format:all": "npx prettier --config ./.prettierrc --write ./packages/* && npx eslint --fix ./packages/*"
   },

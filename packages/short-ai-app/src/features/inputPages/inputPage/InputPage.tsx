@@ -1,5 +1,6 @@
 import styled from '@emotion/styled'
 import {
+  Alert,
   Button,
   InputAdornment,
   ListItemIcon,
@@ -81,8 +82,7 @@ export const InputPage: RFCC<{ page: TaskType }> = ({ page }) => {
   const {
     mutate: taskCreateMutation,
     data,
-    error,
-    isError
+    error
   } = useCreateTaskTasksPost({
     mutation: {
       onSuccess: ({ data: _data }) => {
@@ -105,7 +105,6 @@ export const InputPage: RFCC<{ page: TaskType }> = ({ page }) => {
       }
     }
   })
-  console.log('🐸 Pepe said => error', error)
 
   const handlerCreateTask = (file: Blob | null) => {
     const task: TaskIn = {
@@ -321,6 +320,13 @@ export const InputPage: RFCC<{ page: TaskType }> = ({ page }) => {
           }}
         </Dropzone>
       )}
+      <Spacer />
+      {error ? (
+        <Alert severity="error">
+          Ошибка обработки. Проверьте введеную ссылку и попробуйте зашортить снова (Пока мы
+          поддерживаем только https://habr.com)
+        </Alert>
+      ) : null}
     </div>
   )
 }

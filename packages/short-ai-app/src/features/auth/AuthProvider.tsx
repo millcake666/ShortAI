@@ -94,6 +94,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
 
     const responseHeaders = (config: any) => {
+      if (config?.data?.temporary_id) {
+        localStorage.setItem('temporary-id', config.data.temporary_id)
+      }
+
       const access_token = localStorage.getItem('access_token')?.replaceAll('"', '')
       const temporaryId = localStorage.getItem('temporary-id')?.replaceAll('"', '')
 
