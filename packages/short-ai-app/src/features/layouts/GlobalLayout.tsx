@@ -16,23 +16,16 @@ export const GlobalLayout = () => {
 
   return (
     <>
-      {!!auth?.access_token ? (
-        <div>
-          <Navbar />
-          <Container>
-            <Row>
-              <Col>
-                <Outlet />
-              </Col>
-            </Row>
-          </Container>
-        </div>
-      ) : (
-        <OutletWrapper>
-          <Navbar />
-          <Outlet />
-        </OutletWrapper>
-      )}
+      <div>
+        <Navbar />
+        <Container>
+          <Row>
+            <Col>
+              <Outlet />
+            </Col>
+          </Row>
+        </Container>
+      </div>
       <Spacer space={100} />
     </>
   )

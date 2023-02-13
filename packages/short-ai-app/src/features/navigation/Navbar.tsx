@@ -12,7 +12,8 @@ import {
   MenuItem,
   Switch,
   Tooltip,
-  Typography
+  Typography,
+  useTheme
 } from '@mui/material'
 import { grey } from '@mui/material/colors'
 import React, { useState } from 'react'
@@ -20,8 +21,10 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 import { ROUTES } from '../../consts/routes'
 import { AuthProvider, useAuth } from '../auth/AuthProvider'
+import { useLocalStorage } from '../hooks/useLocalStorage'
 import { Flex, Pad, Spacer } from '../primitives'
 import { blue, darkTheme } from '../themingAndStyling/theme'
+import { ThemeSwitcher } from '../themingAndStyling/ThemeSwitcher'
 import { AvatarIcon } from './AvatarIcon'
 import { AvatarIcon36 } from './AvatarIcon36'
 import { BookmarkIcon } from './BookmarkIcon'
@@ -69,6 +72,8 @@ export const Navbar = () => {
 const AvatarMenu = () => {
   const navigate = useNavigate()
   const { signout } = useAuth()
+  const theme = useTheme()
+  console.log('🐸 Pepe said => AvatarMenu => theme.palette.mode', theme.palette.mode)
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
   const open = Boolean(anchorEl)
@@ -82,7 +87,7 @@ const AvatarMenu = () => {
   return (
     <div>
       <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
-        <Tooltip title="Account settings">
+        <Tooltip title="Настройки">
           <IconButton
             onClick={handleClick}
             size="small"
@@ -126,26 +131,32 @@ const AvatarMenu = () => {
             Сохраненные текста
           </Typography>
         </MenuItem>
-        {/*<MenuItem>*/}
-        {/*  <ListItemIcon>*/}
-        {/*    <DarkmodeIcon />*/}
-        {/*  </ListItemIcon>*/}
-        {/*  <Typography variant={'body1'} color={grey[600]}>*/}
-        {/*    Темная тема*/}
-        {/*  </Typography>*/}
-        {/*  <Pad pad={'0 0 0 20px'}>*/}
-        {/*    <Switch size={'small'} />*/}
-        {/*  </Pad>*/}
-        {/*</MenuItem>*/}
-        <MenuItem onClick={handleClose}>
+        <MenuItem>
+          <ListItemIcon>
+            <DarkmodeIcon />
+          </ListItemIcon>
+          <Typography variant={'body1'} color={grey[600]}>
+            Темная тема*
+          </Typography>
+          <Pad pad={'0 0 0 20px'}>
+            <ThemeSwitcher>
+              <Switch size={'small'} checked={theme.palette.mode === 'dark'} />
+            </ThemeSwitcher>
+          </Pad>
+        </MenuItem>
+        <MenuItem
+          onClick={() => {
+            handleClose()
+            signout()
+          }}
+        >
           <ListItemIcon>
             <LogoutIcon />
           </ListItemIcon>
-          <button onClick={() => signout()}>
-            <Typography variant={'body1'} color={grey[600]}>
-              Выход
-            </Typography>
-          </button>
+
+          <Typography variant={'body1'} color={grey[600]}>
+            Выход
+          </Typography>
         </MenuItem>
       </Menu>
     </div>

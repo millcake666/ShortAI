@@ -130,8 +130,7 @@ export const themeOptions: ThemeOptions = {
     },
     body1: {
       fontSize: 14,
-      fontWeight: 600,
-      color: '#000'
+      fontWeight: 600
     },
     body2: {
       fontSize: 14,
@@ -290,6 +289,7 @@ export const themeOptions: ThemeOptions = {
 }
 
 export const darkTheme = createTheme({
+  ...themeOptions,
   palette: {
     mode: 'dark',
     primary: {
@@ -313,22 +313,95 @@ export const darkTheme = createTheme({
       light: '#FBE8E8'
     }
   },
-  spacing: 8,
-  shape: {
-    borderRadius: 25
-  },
-  typography: {
-    fontFamily: 'SFRounded',
-    h1: {
-      fontSize: 70
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        sizeLarge: {
+          padding: '10px 20px',
+          justifyContent: 'space-between',
+          fontSize: '22px',
+          fontWeight: 600,
+          borderRadius: '30px',
+          '&:hover': {
+            backgroundColor: '#DCDCDE'
+          }
+        },
+        sizeMedium: {
+          height: '50px',
+          fontSize: '20px',
+          fontWeight: 600
+        },
+        sizeSmall: {
+          padding: '6px 16px',
+          height: '42px',
+          fontSize: 16,
+          fontWeight: 500,
+          borderRadius: 25,
+          '&:hover': {
+            backgroundColor: blue[400]
+          }
+        },
+        outlined: {
+          backgroundColor: '#fff',
+          border: '',
+          borderColor: '#000'
+        },
+        contained: {
+          backgroundColor: blue[500],
+          padding: '13px 30px',
+          borderRadius: '35px',
+          color: '#fff'
+        },
+        root: {
+          padding: '8px 20px',
+          fontSize: 25,
+          fontWeight: '600',
+          borderRadius: 25,
+          backgroundColor: '#fff',
+          color: '#000',
+          boxShadow: 'none',
+          textTransform: 'none'
+        }
+      }
     },
-    h5: {
-      fontSize: 24,
-      lineHeight: '28px'
+    MuiSwitch: {
+      styleOverrides: {
+        root: {
+          width: 36,
+          height: 20,
+          padding: 0,
+          margin: 2
+        },
+        switchBase: {
+          padding: '2px !important',
+          '&checked, &$colorPrimary$checked, &$colorSecondary$checked': {
+            transform: 'translateX(16px)',
+            color: '#fff',
+            '& + $track': {
+              opacity: 1,
+              border: 'none'
+            }
+          }
+        },
+        thumb: {
+          width: 24,
+          height: 24
+        },
+        track: {
+          borderRadius: 13,
+          backgroundColor: '#dcdcde',
+          opacity: 1,
+          transition:
+            'background-color 300ms cubic-bezier(0.4, 0, 0.2, 0.5) 0ms,border 300ms cubic-bezier(0.4, 0, 0.2, 0.5) 0ms !important'
+        }
+      }
     },
-    h6: {
-      fontSize: 18,
-      fontWeight: 'normal'
+    MuiMenu: {
+      styleOverrides: {
+        root: {
+          color: '#fff'
+        }
+      }
     }
   }
 })

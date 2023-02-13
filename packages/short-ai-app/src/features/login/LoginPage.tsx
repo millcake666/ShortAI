@@ -45,7 +45,7 @@ export const LoginPage = () => {
       }}
     >
       {auth.access_token ? (
-        <Flex flexDirection="column">
+        <Flex flexDirection="column" justifyContent="center" alignItems="center">
           <Typography variant="h3">
             <b>Вы уже вошли</b>
           </Typography>
@@ -128,13 +128,7 @@ export const LoginPage = () => {
           <Typography>
             У вас нет аккаунта?{' '}
             <RegW>
-              <a
-                onClick={() => {
-                  navigate(ROUTES.REG)
-                }}
-              >
-                Зарегистрируйтесь
-              </a>
+              <Link to={ROUTES.REG}>Зарегистрируйтесь</Link>
             </RegW>
           </Typography>
         </Flex>

@@ -49,6 +49,7 @@ button {
 
 a {
   text-decoration: none;
+  cursor: pointer;
 }
 a:visited {
   color: #027ffe;

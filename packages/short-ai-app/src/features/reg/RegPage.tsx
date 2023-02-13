@@ -5,13 +5,13 @@ import { Col, Row } from 'react-grid-system'
 import { Controller, FieldValues, FormProvider, useForm } from 'react-hook-form'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 
+import { BREAKPOINTS } from '../../consts/common'
 import { ROUTES } from '../../consts/routes'
 import { useCreateUserUserPost } from '../api/generated/endpoints'
 import { UserCreate } from '../api/generated/models'
 import { useAuth } from '../auth/AuthProvider'
 import { Error, Flex, Spacer } from '../primitives'
 import { blue, grey } from '../themingAndStyling/theme'
-import { BREAKPOINTS } from '../../consts/common'
 
 export const RegPage = () => {
   const navigate = useNavigate()
@@ -164,7 +164,7 @@ export const RegPage = () => {
               <Typography>
                 У вас уже есть аккаунт?{' '}
                 <RegW>
-                  <a onClick={() => navigate(ROUTES.LOGIN)}>Войдите</a>
+                  <Link to={ROUTES.LOGIN}>Войдите</Link>
                 </RegW>
               </Typography>
               <Spacer />

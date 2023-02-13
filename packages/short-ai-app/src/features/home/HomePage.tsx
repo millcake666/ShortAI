@@ -1,25 +1,12 @@
 import styled from '@emotion/styled'
-import ArrowForwardRoundedIcon from '@mui/icons-material/ArrowForwardRounded'
-import {
-  Box,
-  Button,
-  Chip,
-  Container,
-  Icon,
-  Slider,
-  Stack,
-  Tooltip,
-  Typography,
-  useTheme
-} from '@mui/material'
+import { Box, Button, Slider, Typography, useTheme } from '@mui/material'
 import React from 'react'
+import AnimateHeight from 'react-animate-height'
 import { Col, Row } from 'react-grid-system'
 import { useNavigate } from 'react-router-dom'
+import Typewriter from 'typewriter-effect'
 
 import { ROUTES } from '../../consts/routes'
-import { DropInput } from '../inputPages/filePage/DropInput'
-import { Logo } from '../navigation/Logo'
-import { ScrollToTop } from '../navigation/ScrollToTop'
 import { Flex, Pad, Spacer } from '../primitives'
 import { FileDocIcon } from './FileDocIcon'
 import { LinkIcon } from './LinkIcon'
@@ -42,12 +29,31 @@ export const HomePage = () => {
     }
   }
 
+  const textHeightMultiplier = window.innerWidth < 800 ? 2.7 : 1.5
+
   return (
     <div>
       <Flex flexDirection={'column'} justifyContent={'space-between'}>
-        <Typography variant={'h2'} alignItems={'center'} textAlign={'center'}>
-          {varText[value]}
-        </Typography>
+        <HeadingWrapper>
+          <AnimateHeight duration={500} height={varText[value].length * textHeightMultiplier}>
+            <Typography variant={'h2'} alignItems={'center'} textAlign={'center'}>
+              <Typewriter
+                options={{ delay: 19 }}
+                key={varText[value]}
+                onInit={(typewriter) => {
+                  typewriter
+                    .typeString(varText[value])
+                    .callFunction(() => {
+                      console.log('String typed out!')
+                    })
+                    .start()
+                }}
+              />
+              {/* {varText[value]} */}
+            </Typography>
+          </AnimateHeight>
+        </HeadingWrapper>
+
         <Spacer space={30} />
         <Flex alignItems={'center'} flexDirection={'column'}>
           <Typography variant={'body1'}>Как это работает?</Typography>
@@ -58,13 +64,18 @@ export const HomePage = () => {
           </Flex>
         </Flex>
       </Flex>
-      <Spacer space={130} mobSpace={20} />
+      <Spacer space={60} mobSpace={30} />
       <Flex
         width={'100%'}
         flexDirection={'column'}
         alignItems={'center'}
         justifyContent={'center'}
-        style={{ backgroundColor: theme.palette.primary.main, borderRadius: '40px', maxWidth: '800px', margin: 'auto'}}
+        style={{
+          backgroundColor: theme.palette.primary.main,
+          borderRadius: '40px',
+          maxWidth: '800px',
+          margin: 'auto'
+        }}
       >
         <Spacer space={50} />
         <Typography variant={'h1'} style={{ color: '#ffffff' }} textAlign={'center'}>
@@ -94,7 +105,13 @@ const ButtonWrap = styled.div`
   flex-direction: column;
   row-gap: 12px;
 `
+const HeadingWrapper = styled.div`
+  /* min-height: 150px;
 
+  @media (max-width: 768px) {
+    min-height: 300px;
+  } */
+`
 // const marks = [
 //     {
 //         value: 1,

@@ -20,7 +20,9 @@
   },
   "dependencies": {
     "@fingerprintjs/fingerprintjs": "^3.4.0",
-    "@stdlib/math": "0.0.11"
+    "@stdlib/math": "0.0.11",
+    "react-animate-height": "^3.1.0",
+    "typewriter-effect": "^2.19.0"
   },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "7.14.5",

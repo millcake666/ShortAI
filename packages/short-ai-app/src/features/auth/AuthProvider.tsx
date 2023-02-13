@@ -6,8 +6,8 @@ import React, { useEffect, useState } from 'react'
 import { Navigate, useLocation, useNavigate } from 'react-router-dom'
 
 import { ROUTES } from '../../consts/routes'
-import { useLocalStorage } from '../hooks/useLocalStorage'
 import { useRefreshTokenRefreshPost } from '../api/generated/endpoints'
+import { useLocalStorage } from '../hooks/useLocalStorage'
 
 const fpPromise = FingerprintJS.load({
   monitoring: false
@@ -39,7 +39,7 @@ interface AuthContextType {
   signout: (callback?: VoidFunction) => void
   authError: string
   refresh_token: string | null
-  fingerprint: string
+  fingerprint: string | undefined
 }
 
 const AuthContext = React.createContext<AuthContextType>(null!)
