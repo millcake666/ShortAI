@@ -1,0 +1,14 @@
+
+default:
+  tags: 
+    - front
+
+build_image:
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    
+  script:
+    - docker build -t front:v2 .
+    - docker rm -f front
+    - docker run -d -p 3000:3000  --name front front:v2
